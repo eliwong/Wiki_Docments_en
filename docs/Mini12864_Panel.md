@@ -48,11 +48,10 @@ This screen driver is ST7567 and is compatible with the marlin Mini panel (UC170
 
 **Before you start, please install the latest version of U8glib.**
 
-##### Step1. changes the pins.
+### Step1. changes the pins.
 
 On a RAMPS-compatible board, you need to make the following changes in pins_RAMPS.h:
-
-``` cpp tab='pins_RAMPS.h'
+```
  #elif ENABLED(MINIPANEL)
       #define BEEPER_PIN 37
       // Pins for DOGM SPI LCD Support
@@ -71,51 +70,20 @@ On a RAMPS-compatible board, you need to make the following changes in pins_RAMP
       #define SD_DETECT_PIN 49
 ```
 
-On a our F6 board, you need to make the following changes in pins_FYSETC_F6_V13.h:
-
-
-``` cpp tab='pins_FYSETC_F6_V13.h'
-//////////////////////////
-// LCDs and Controllers //
-//////////////////////////
-
-    // #define LCD_PINS_RS         16
-    // #define LCD_PINS_ENABLE     17
-    // #define LCD_PINS_D4         23
-    // #define LCD_PINS_D5         25
-    // #define LCD_PINS_D6         27
-    // #define LCD_PINS_D7         29
-    
-    // Pins for DOGM SPI LCD Support
-    #define DOGLCD_A0  16
-    #define DOGLCD_CS  17
-    #define LCD_BACKLIGHT_PIN -1 
-    #define LCD_RESET_PIN  23
-    #define LCD_CONTRAST 255
-    
-    #define SDSS   53
-    #define BEEPER_PIN          37
-    #define BTN_EN1             31
-    #define BTN_EN2             33
-    #define BTN_ENC             35
-    #define SD_DETECT_PIN       49
-    #define KILL_PIN            41
-```
-##### Step2. Config the configuration.h. 
+### Step2. Config the configuration.h. 
 
 In order to control RGB-LED, you also need to turn on the RGB control in marlin.
 
 For V1.2 and V2.0: 
 
 You need enable the RGB_LED, and config the R/G/B pins.
-
-``` cpp tab='configration.h'
-/************ 1.enable this line for mini12864 V1.2 and V2.0 **************/
+```
+// 1.enable this line for mini12864 V1.2 and 
 #define RGB_LED 
 //#define RGBW_LED
 
 #if ENABLED(RGB_LED) || ENABLED(RGBW_LED)
-/************ 2.change the 3 line for mini12864 V1.2 and V2.0 **************/
+//2.change the 3 line for mini12864 V1.2 and V2.0
   #define RGB_LED_R_PIN 25
   #define RGB_LED_G_PIN 27
   #define RGB_LED_B_PIN 29
@@ -123,13 +91,10 @@ You need enable the RGB_LED, and config the R/G/B pins.
 #endif
 ```
 
-For V2.1:
-
-You only need enable the NEOPIXEL_LED.
-
-``` cpp tab='configration.h'
+For V2.1, you only need enable the NEOPIXEL_LED.
+```
 // Support for Adafruit Neopixel LED driver
-/********** 1. only need enable the NEOPINEL_LED for mini12864 V2.1 **********/
+// 1. only need enable the NEOPINEL_LED for mini12864 V2.1
 #define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
   #define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
@@ -141,16 +106,15 @@ You only need enable the NEOPIXEL_LED.
 #endif
 ```
 
-##### Step3. Config the configuration_adv.h.
+### Step3. Config the configuration_adv.h.
 
 If you need to change the RGB-color manually,  then you need to enable the LED_CONTROL_MENU in configuration_adv.h. If you don't need it, you can skip this step.
-
-``` cpp tab='configration_adv.h'
+```
 /**
  * LED Control Menu
  * Enable this feature to add LED Control to the LCD menu
  */
-/********** 1. enable the LED_CONTROL_MENU RGB manual control **********/
+// 1. enable the LED_CONTROL_MENU RGB manual control
 #define LED_CONTROL_MENU
 #if ENABLED(LED_CONTROL_MENU)
   #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
@@ -165,7 +129,7 @@ If you need to change the RGB-color manually,  then you need to enable the LED_C
 #endif // LED_CONTROL_MENU
 ```
 
-##### Step4. add the codes in ultralcd_impl_DOGM.h.
+### Step4. add the codes in ultralcd_impl_DOGM.h.
 
 You need to add a shorts codes to ultralcd_impl_DOGM.h, otherwise your screen may not have text displayed, or it may not be clear.
 Add  "u8g.setContrast(255);" in the "static void lcd_implementation_init()" function:
