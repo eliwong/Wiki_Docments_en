@@ -160,6 +160,17 @@ In order to give you a better understanding of how to use jumpers for different 
 
 - For TE0-TE2, You can cut the jumper if you want use a thermocouple temperature measurement through AD597.
 
+### 5. Jumper for 5V
+
+S6 **V2.0** version adds 5V selection jumper. You can choose 5V from USB or DC circuit.
+
+![S6跳线-5V](images/S6跳线-5V.png)
+
+### 6. Jumper for Boot0
+
+In S6 V2.0, the BOOT0 button is replaced by a jumper.
+
+![S6V2.0BOOT0](images/S6V2.0BOOT0.png)
 ## Pin Definition
 
 All the pins we have marked on the back of the board, if you need to, you can confirm the board in reverse or check the sch.
