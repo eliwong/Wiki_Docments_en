@@ -4,7 +4,7 @@
 
 ------
 
-![Cheetah_top](images/AIO_II_TOP.png)
+![Cheetah_top](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_II_TOP.png)
 
 This is an All In One (So we call it AIO) solution with 32-bit MCU and 256-microsteps stepper motor drive for  3DP/CNC or similar machine.It has everything you need to assemble a 3DP, including a display and an SD card holder.
 
@@ -61,13 +61,21 @@ This is an All In One (So we call it AIO) solution with 32-bit MCU and 256-micro
 | Output               | BED OUT：10A Max ；Heater Out：5A Max |
 
 ## Pin Definition
+
 ------
+
 ##### Connector define：
-![AIO_3.2_pinout](images/AIO_3.2_pinout.PNG)
+
+![AIO_3.2_pinout](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_3.2_pinout.PNG)
+
 ##### microsteps setting：
-![AIO_3.2_820_steps](images/AIO_3.2_820_steps.png)
+
+![AIO_3.2_820_steps](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_3.2_820_steps.png)
+
 ## Firmware Guide
+
 ------
+
 #### Download Vscode + platformio
 
 To compile the firmware , you need to install Visual Studio Code and the platformio pulg-in.
@@ -84,11 +92,11 @@ The latest configurations are in separate repository [here](https://github.com/M
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-![1561099422559](images\1561099422559.png)
+![1561099422559](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f1.png)
 
 If everything goes fine , at the bottom you can see several buttons
 
-![1561099546202](images\1561099546202.png)
+![1561099546202](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f2.png)
 
 The check mark is for compiling .
 
@@ -118,7 +126,7 @@ Connect the board and your pc with USB cable (This step should before you open t
 
 Double the click "FlyMcu.exe" software to open it.
 
-![1561100540118](images\1561100540118.png)
+![1561100540118](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f3.png)
 
 
 
@@ -171,7 +179,7 @@ dmesg
 
 And you will get message like 
 
-![1562654867797](C:\Users\George\AppData\Roaming\Typora\typora-user-images\1562654867797.png)
+![1562654867797](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f4.png)
 
 the ttyUSB0 is the port to communicate with the motherboard.
 
@@ -182,17 +190,23 @@ And then go the the firmware.hex file location directory and do the follow comma
 ```
 
 ## Attachments
+
 ------
-- [Schematic files](https://github.com/AIO_II/)
-- [PCB files](https://github.com/FYSETC/AIO_II/)
-- [2D and 3D drawings](https://github.com/FYSETC/AIO_II/)
+
+- [Schematic files](https://github.com/FYSETC-AIO_II/)
+- [PCB files](https://github.com/FYSETC/FYSETC-AIO_II/)
+- [2D and 3D drawings](https://github.com/FYSETC/FYSETC-AIO_II/)
 
 ## Where to Buy
+
 ------
-- [FYSETC AIO II V3.1](https://www.aliexpress.com/item/32911155606.html)
+
+- [FYSETC AIO II V3.1](https://www.aliexpress.com/item/32888370577.html)
 
 ## Tech Support
+
 -------
+
 For some reason,, we have to access Facebook via VPN...so our engineers can't reply to your question on Facebook in time, if possible, please ask questions in the forum.
 **Please submit any technical issue into our [forum](http://forum.fysetc.com/)** .
 
