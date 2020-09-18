@@ -97,11 +97,11 @@ And if you want to know what we have changed , we recommend to use git to get th
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-![1561099422559](images\1561099422559.png)
+![1561099422559](images\aio_f1.png)
 
 If everything goes fine , at the bottom you can see several buttons
 
-![1561099546202](images\1561099546202.png)
+![1561099546202](images\AIO_f2.png)
 
 Just click check mark to compile.
 
@@ -121,7 +121,7 @@ Power the board with power supply and connect the board to your PC with USB cabl
 
 Double the click "FlyMcu.exe" software to open it.
 
-![1561100540118](images\1561100540118.png)
+![1561100540118](images\aio_f3.png)
 
 
 
@@ -177,7 +177,7 @@ dmesg
 
 And you will get message like 
 
-![1562654867797](C:\Users\George\AppData\Roaming\Typora\typora-user-images\1562654867797.png)
+![1562654867797](images\aio_f4.png)
 
 the ttyUSB0 is the port to communicate with the motherboard.
 
