@@ -1,6 +1,6 @@
 
 
-![IMG_0389](images/IMG_0389.jpg)
+![IMG_0389](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_IMG_0389.jpg)
 
 The S6 is based on the STM32F446 32bit mcu, like the F6, has six drive sockets and supports the full range of TMC drives. We have fully extended the resources of the MCU so that you can maximize its power. We considered the possible use scenarios of 3D printers and designed a series of extended applications, such as anti-reverse circuit, 12V power supply, thermocouple support, 24V sensor support and so on.
 
@@ -33,6 +33,7 @@ The S6 is based on the STM32F446 32bit mcu, like the F6, has six drive sockets a
 - 3 ways PWM fans ，2 ways RGB led ，12V & 24V optional
 
 - Easy DISPLAY + SD-CARD connector:
+
   - RepRapDiscount SmartController compatible pin header on board
   - 10P FPC for Serial Touch display
   - 2X4 PinHeader Out for SD Card moudle 
@@ -43,6 +44,7 @@ The S6 is based on the STM32F446 32bit mcu, like the F6, has six drive sockets a
   
 
 ## Application
+
 ---
 
 - 3D printer 
@@ -55,9 +57,9 @@ The S6 is based on the STM32F446 32bit mcu, like the F6, has six drive sockets a
 
 ## Hardware Reasources
 
-![1574476641063](images/1574476641063.png)
+![1574476641063](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476641063.png)
 
-![1574476619462](images/1574476619462.png)
+![1574476619462](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476619462.png)
 
 
 | Board Name           | S6                                               | F6                                               |
@@ -84,10 +86,12 @@ The S6 is based on the STM32F446 32bit mcu, like the F6, has six drive sockets a
 
 
 ## Jumpers 
+
 ---
+
 **Just like the F6 V1.4, the two Z-motor sockets are changed from parallel to series. If you only use one of the sockets, the other must be connected with a jumper cap, otherwise a Z-axis motor will not work.**
 
-![1574491030269](images/1574491030269.png)
+![1574491030269](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574491030269.png)
 
 
 
@@ -95,11 +99,11 @@ The S6 is based on the STM32F446 32bit mcu, like the F6, has six drive sockets a
 
 In order to support as many different drivers as possible, S6 sets a lot of jumper positions. Different drive modules require different jumpers. As shown in the schematic diagram, there are 2 sets of jumpers in the drive section: JP1 and  JP6. 
 
-![1574475839586](images/1574475839586.png)
+![1574475839586](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574475839586.png)
 
 In order to give you a better understanding of how to use jumpers for different drivers, I have further illustrated the driver socket. The basic definition of the driver pins is the same, the difference lies in the four places of JP6-1, JP6-2, JP6-3 and JP6-4. You can see their role from the schematic.
 
-![1574476699891](images/1574476699891.png)
+![1574476699891](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476699891.png)
 
 
 
@@ -107,7 +111,7 @@ In order to give you a better understanding of how to use jumpers for different 
 
 #### A4988 jumper config
 
-![1574477723736](images/1574477723736.png)
+![1574477723736](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574477723736.png)
 
 - For A4988, A4988 similar, TMC2100 and TMC standalone Mode,  You need jumper JP6 (1234-5678) to config the micro-steps, and some TMC features.
 - When you connect the jumper cap, this pin is high. When you are not connected, it is the level state of the module itself. This is different from F6, which can be either high or low.
@@ -117,7 +121,7 @@ In order to give you a better understanding of how to use jumpers for different 
 
 #### UART mode config
 
-![1574477819491](images/1574477819491.png)
+![1574477819491](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574477819491.png)
 
 - For TMC2208/2225/2209. You just need one jumper to close the JP1, Then the UART mode will enabled.
 - You can config all the feature of  the TMC chip via UART, so you can leave all the other jumpers empty.
@@ -125,13 +129,13 @@ In order to give you a better understanding of how to use jumpers for different 
 
 #### SPI mode config
 
-![1574477946366](images/1574477946366.png)
+![1574477946366](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574477946366.png)
 
 - For TMC2130/5160/5161. You need 4 jumpers to close the JP6, Then the SPI mode will enabled.
 
 ### 2.12V/24V jumpers
 
-![1574476322618](images/1574476322618.png)
+![1574476322618](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476322618.png)
 
 
 
@@ -141,20 +145,20 @@ In order to give you a better understanding of how to use jumpers for different 
 
 ### 3.DIAG jumpers
 
-![1574476382401](images/1574476382401.png)
+![1574476382401](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476382401.png)
 
 - If you use a TMC driver with sensor-less homing(2130/2209/5160/5161), you can connect these jumpers so that the MCU can get the DIAG signal through the corresponding end-stop pin to achieve sensor-less.
 - After connect the jumper, remember define the DIAG pins in the firmware and enable the feature.
 
 ### 4.Bottom jumpers
 
-![1574476497110](images/1574476497110.png)
+![1574476497110](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476497110.png)
 
 - X+ / Y+ / Z+ , You can choose 5V or 3.3V, For X+ & Y+, the default is 3.3V. For Z+, The default is 5V, You can connect BLtouch here.
 
 - X- / Y- / Z- , You can choose 24V or 3.3V, the default is 3.3V. You can switch to 24V, if you want to use some inductive or capacitive sensors.
 
-  ![1574476533464](images/1574476533464.png)
+  ![1574476533464](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574476533464.png)
 
 - I2C pins, You can choose 5V or 3.3V, the default is 3.3V. 
 
@@ -164,13 +168,14 @@ In order to give you a better understanding of how to use jumpers for different 
 
 S6 **V2.0** version adds 5V selection jumper. You can choose 5V from USB or DC circuit.
 
-![S6跳线-5V](images/S6跳线-5V.png)
+![S6跳线-5V](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6跳线-5V.png)
 
 ### 6. Jumper for Boot0
 
 In S6 V2.0, the BOOT0 button is replaced by a jumper.
 
-![S6V2.0BOOT0](images/S6V2.0BOOT0.png)
+![S6V2.0BOOT0](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6V2.0BOOT0.png)
+
 ## Pin Definition
 
 All the pins we have marked on the back of the board, if you need to, you can confirm the board in reverse or check the sch.
@@ -179,7 +184,7 @@ Thanks to the power of the STM32, each pin has multiple functions, I will identi
 
 ### EXP1&EXP2
 
-![1574483263718](images/1574483263718.png)
+![1574483263718](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574483263718.png)
 
 
 
@@ -187,13 +192,13 @@ Thanks to the power of the STM32, each pin has multiple functions, I will identi
 
 The UART socket next to the limit switch can be used to connect serial devices such as the wifi module, or to update the firmware through the serial port.
 
-![1574482734041](images/1574482734041.png)
+![1574482734041](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574482734041.png)
 
 
 
 ### BL-touch Wiring Example
 
-![img](images/1574489576766.png)
+![img](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574489576766.png)
 
 
 
@@ -215,11 +220,11 @@ You can download the firmware from https://github.com/FYSETC/Marlin-2.0.x-FYSETC
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-![1561099422559](images/1561099422559.png)
+![1561099422559](images/AIO_f1.png)
 
 If everything goes fine , at the bottom you can see several buttons
 
-![1561099546202](images/1561099546202.png)
+![1561099546202](images/AIO_f2.png)
 
 The check mark is for compiling , click it to compile.
 
@@ -241,7 +246,7 @@ https://www.st.com/zh/development-tools/stm32cubeprog.html
 
 Open the STM32CubeProgrammer software.
 
-![1574332767079](images/1574332767079.png)
+![1574332767079](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574332767079.png)
 
 ##### 2.Enter DFU mode
 
@@ -251,7 +256,7 @@ First power off the board , then push the Boot0 button and hold it , then connec
 
 Now you can connect and flash the S6 board with stm32cubeprogrammer with the following operation.
 
-![1574386395071](images/1574386395071.png)
+![1574386395071](E:/Projects/BOARD-FYSETC_S6/FYSETC-S6/images/S6_1574386395071.png)
 
 Do as the red number shows in the screen shot.
 
@@ -263,7 +268,7 @@ Do as the red number shows in the screen shot.
 
 4. fill in the 'Start address' with 0x8010000
 
-6. Start Programming
+5. Start Programming
 
 **We will continue to update, please look forward to it!**
 
@@ -272,6 +277,7 @@ Do as the red number shows in the screen shot.
 ## Tech Support
 
 ---
+
 You can dowload file from our [github](https://github.com/FYSETC/FYSETC-S6)
 Please submit any technical issue into our [forum](http://forum.fysetc.com/) 
 
