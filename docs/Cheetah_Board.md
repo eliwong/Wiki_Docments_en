@@ -2,7 +2,7 @@
 
 ---
 
-![](images/Cheetah V1.2b real.png)
+![](images/Cheetah_V1.2b_real.png)
 
 Designed for a single-head 3D printer, many interfaces are reserved for more features. Such as AC detection, filament detection, leveling with BL-touch or other sensors.
 
