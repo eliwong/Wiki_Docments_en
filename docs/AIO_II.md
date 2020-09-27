@@ -4,7 +4,7 @@
 
 ------
 
-![Cheetah_top](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_II_TOP.png)
+![Cheetah_top](images/AIO_II_TOP.png)
 
 This is an All In One (So we call it AIO) solution with 32-bit MCU and 256-microsteps stepper motor drive for  3DP/CNC or similar machine.It has everything you need to assemble a 3DP, including a display and an SD card holder.
 
@@ -66,11 +66,11 @@ This is an All In One (So we call it AIO) solution with 32-bit MCU and 256-micro
 
 ##### Connector define：
 
-![AIO_3.2_pinout](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_3.2_pinout.PNG)
+![AIO_3.2_pinout](images/AIO_3.2_pinout.PNG)
 
 ##### microsteps setting：
 
-![AIO_3.2_820_steps](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_3.2_820_steps.png)
+![AIO_3.2_820_steps](images/AIO_3.2_820_steps.png)
 
 ## Firmware Guide
 
@@ -92,11 +92,11 @@ The latest configurations are in separate repository [here](https://github.com/M
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-![1561099422559](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f1.png)
+![1561099422559](images/AIO_f1.png)
 
 If everything goes fine , at the bottom you can see several buttons
 
-![1561099546202](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f2.png)
+![1561099546202](images/AIO_f2.png)
 
 The check mark is for compiling .
 
@@ -126,7 +126,7 @@ Connect the board and your pc with USB cable (This step should before you open t
 
 Double the click "FlyMcu.exe" software to open it.
 
-![1561100540118](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f3.png)
+![1561100540118](images/AIO_f3.png)
 
 
 
@@ -179,7 +179,7 @@ dmesg
 
 And you will get message like 
 
-![1562654867797](E:/Projects/BOARD-FYSETC-AIO/FYSETC-AIO_II/images/AIO_f4.png)
+![1562654867797](images/AIO_f4.png)
 
 the ttyUSB0 is the port to communicate with the motherboard.
 
