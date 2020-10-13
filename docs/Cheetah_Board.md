@@ -121,11 +121,11 @@ Power the board with power supply and connect the board to your PC with USB cabl
 
 Double the click "FlyMcu.exe" software to open it.
 
-![1561100540118](images\AIO_f3.png)
+![1561100540118](images\Flymcu界面.png)
 
 
 
-Select "Reset@DTR low(<-3v),ISP @RTS High"
+Select "Reset@DTR High(<-3v),ISP @RTS High"
 
 Click "Port" to select the port of your USB 
 
