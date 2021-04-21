@@ -126,7 +126,7 @@ nav:
     - FYSETC AIO II: AIO_II.md
     - FYSETC Cheetah Board: Cheetah_Board.md
     - FYSETC E4: E4.md
-    - FYSETC_SPIDER : Spider.md
+    - FYSETC SPIDER : Spider.md
 
 
 - LCDs and Displays:
@@ -152,6 +152,7 @@ nav:
     - Silent5160: S5160_V1.2.md
     - Silent5161: S5161_V1.1.md
     - Silent2225: TMC2225.md
+    - Silent2226: TMC2226.md
     - ST820 V1.0: ST820_V1.0.md
     - LV8729 V1.0: LV8729_V1.0.md
         
