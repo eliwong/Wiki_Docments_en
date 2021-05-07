@@ -26,7 +26,7 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
 - **Type-C and Type-B USB connector optional**
 - EXP1 & EXP2 have more multiplexing functions, such as USART, I2C, CAN
 - SD card & USB upload support
-- 4.7k temperature sensor pull-up resistor. PT100 can be used directly.
+- 4.7k temperature sensor pull-up resistor. PT100 module can be used directly.
 # 3. Haredware Guide
 
 ## 3.1 Wiring
@@ -89,10 +89,10 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
    <tr><td>E1-Heater</td><td>PC8</td><td>65</td><td></td></tr>
    <tr><td>E2-Heater</td><td>PB3</td><td>89</td><td></td></tr>
    <tr><td>Heated-Bed</td><td>PB4</td><td>90</td><td></td></tr>
-   <tr><td rowspan="4">Temperature</td><td>TE0（THERM0）</td><td>PC0</td><td>15</td><td>4.7K 0.1% resistance pull up, PT100 can be used</td></tr>
-   <tr><td>TE1（THERM1）</td><td>PC1</td><td>16</td><td>4.7K 0.1% resistance pull up, PT100 can be used</td></tr>
-   <tr><td>TE2（THERM2）</td><td>PC2</td><td>17</td><td>4.7K 0.1% resistance pull up, PT100 can be used</td></tr>
-   <tr><td>TB（THERM3）</td><td>PC3</td><td>18</td><td>4.7K 0.1% resistance pull up, PT100 can be used</td></tr>
+   <tr><td rowspan="4">Temperature</td><td>TE0（THERM0）</td><td>PC0</td><td>15</td><td>4.7K 0.1% resistance pull up, PT100 module can be used</td></tr>
+   <tr><td>TE1（THERM1）</td><td>PC1</td><td>16</td><td>4.7K 0.1% resistance pull up, PT100 module can be used</td></tr>
+   <tr><td>TE2（THERM2）</td><td>PC2</td><td>17</td><td>4.7K 0.1% resistance pull up, PT100 module can be used</td></tr>
+   <tr><td>TB（THERM3）</td><td>PC3</td><td>18</td><td>4.7K 0.1% resistance pull up, PT100 module can be used</td></tr>
    <tr><td rowspan="8">EXP2</td><td>LCD_D7</td><td>PD1/CAN-TX1</td><td>82</td><td>Share with CAN-TX1</td></tr>
    <tr><td>LCD_D6</td><td>PD0/CAN-RX1</td><td>81</td><td>Share with CAN-RX1</td></tr>
    <tr><td>LCD_D5</td><td>PC12/MOSI3/TX5/SDA2</td><td>80</td><td></td></tr>
@@ -116,6 +116,7 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
    <tr><td rowspan="3">SWD Debug</td><td></td><td>PA13/SWDIO</td><td>72</td><td>only used for debugging now and can be used for other purposes.</td></tr>
    <tr><td></td><td>PA14/SWCLK</td><td>76</td><td>only used for debugging now and can be used for other purposes.</td></tr>
 </table>
+
 
 # 4. Firmware Guide 
 ## 4.1 Marlin
@@ -194,15 +195,15 @@ Do as the red number shows in the screen shot.
 
 You need to follow the Klipper [installation guide](https://www.klipper3d.org/Installation.html) to install [Klipper](https://github.com/KevinOConnor/klipper).
 
-When calling "menuconfig", enable "extra low-level configuration setup" and select the "12MHz crystal" as clock reference. For flashing, write the compiled klipper.bin to memory location 0x08000000 (This is because i don't find boot address setting in Klipper , but if Klipper future update support this feature, then you can set the boot address and write the klipper.bin file to 0x08010000).
+When calling "menuconfig", enable "extra low-level configuration setup" and select the "12MHz crystal" as clock reference. 
 
-If you set the address to 0x08000000 then you can't use the Spider bootloader and you can't upload klpper.bin with sdcard.  Then you can only use DFU mode to update the firmware. Please follow [Upload the firmware(DFU)](#jump). **But you need to set the 'Start address' to 0x08000000 and Choose klipper.bin file but not firmware.bin**.
+Boot address option1
 
-Also we have a pre-build firmware `klipper.bin` in  `firmware/Klipper` folder in this repository.  You can just use it.
+At the moment ,i don't find boot address setting in Klipper, so all two firmwares we pre-build [klipper.bin](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) and [klipper-UART0.bin](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) (The differences between two firmware , you can check README [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper)) are at boot address 0x8000000. Please follow [Upload the firmware(DFU)](#jump) to upload the firmware to Spider board. **But you need to set the 'Start address' to 0x08000000 and Choose klipper.bin file but not firmware.bin**.
 
-And there is printer.cfg for VORON 2.4 machine , you can take it as an example.
+Boot address option2
 
-If you can set the boot address to 0x08010000, then you can follow [Upload the firmware(SDCARD)](#jump1).
+If Klipper future update support boot address settings for STM32F446 chips, then you can set the boot address to 0x08010000 and build Klipper yourself. Then you need to flash the spider board bootloader first. The bootloader is in the folder named `bootloader` in this repo, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader). Then you can follow [Upload the firmware(SDCARD)](#jump1) to flash your built Klipper firmware to Spider.
 
 ## 4.3 RRF
 **As RRF firmware requires more than 512KB of Flash space, the Spider equipped with 446 cannot meet its requirements. So Spider has another version dedicated to running RRF firmware, which uses STM32F407VGT6 MCU.**
