@@ -199,7 +199,8 @@ nav:
     - How to Configure TMC2130 on FYSETC F6 Board: How_to_Configure_TMC2130_on_FYSETC-F6-Board.md
     - How to Configure TMC2208 on FYSETC F6 Board: How_to_Configure_TMC2208_on_FYSETC-F6-Board.md
     - How to Use Mini 12864 on SKR Board: Manual_for_Mini_panel_on_SKR.md
-    - Tutorial Introduction: Tutorial.md     
+    - Tutorial Introduction: Tutorial.md  
+    - How to use BIQU‘s mini12864 on Spider: BIQU12864_On_Spider.md    
 - Others:
     - Others Introduction: Others.md
     - FYS Boost LED Driver V1.0: FYS_Boost_LED_Driver_V1.0.md
