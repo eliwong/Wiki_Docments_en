@@ -31,24 +31,26 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
 ### 3.1 Wiring
 
 ![](images/Spider_wiring.svg)
-### 3.2 Pin Out
+
+### 3.2 Wiring : FYSETC mini 12864 v2.1 
+
+####  注意/NOTICE
+
+​    ![](https://wiki.fysetc.com/images/Spider_notice.png)
+
+   为了兼容某些主板，如RAMPS1.4，FYSETC mini12864 设置了 RST(R3) 和 KILL(R4) 的可选择电阻。目前，有些主板（S6/Spider）将 KILL 换成 5V，此时，请确认FYSETC mini12864 上 R4处于空贴状态，否则按下屏幕上的按钮会致使 5V 与 GND 短路，长时间操作会导致主板损坏。<br>   In order to be compatible with some motherboards, such as RAMPS1.4, mini12864 is equipped with RST (R3) and KILL (R4) optional resistors. At present, some motherboards (S6/Spider) change the KILL to 5V. At this time, please make sure that R4 is not on the mini12864 (please remove it if it is  on the board), otherwise pressing the button on the screen will cause a short circuit between 5V and GND, and long-term operation will cause the motherboard to be damaged.
+
+  目前发现有些主板在接上 mini12864，并采用 USB 进行烧录时会导致无法烧录的情况，请去除 R1 10K 电阻。<br>At the moment , some Spider can't upload the firmware using USB if mini12864 is connected to the board, if you run into this issue, please remove R1  resistor.
+
+### 3.3 Wiring : TMC2209
+
+ ![](images/SPIDER-S6-TMC2209.JPG)
+
+### 3.4 Pin Out
+
 ![](images/Spider_V1.0_Pinout.svg)
-### 3.3 注意/NOTICE
 
-<table width="100%">
-  <tr>
-    <th width="40%">sch</th>
-    <th>notice</th>
-  </tr>
-  <tr>
-    <td><img src="https://wiki.fysetc.com/images/Spider_notice.png"/></td>
-    <td>为了兼容某些主板，如RAMPS1.4，FYSETC mini12864 设置了 RST(R3) 和 KILL(R4) 的可选择电阻。目前，有些主板（S6/Spider）将 KILL 换成 5V，此时，请确认 mini12864 上 R4处于空贴状态，否则按下屏幕上的按钮会致使 5V 与 GND 短路，长时间操作会导致主板损坏。<br/>   
-        In order to be compatible with some motherboards, such as RAMPS1.4, mini12864 is equipped with RST (R3) and KILL (R4) optional resistors. At present, some motherboards (S6/Spider) change the KILL to 5V. At this time, please make sure that R4 on the mini12864 is in the empty state, otherwise pressing the button on the screen will cause a short circuit between 5V and GND, and long-term operation will cause the motherboard to be damaged.</td>
-  </tr>
-</table>
-
-
-### 3.4 Pin Definition
+### 3.5 Pin Definition
 
 <table>
    <tr><td>Features</td><td>Spider Pin</td><td>STM32 Pin</td><td>Pin No.</td><td>Comment</td></tr>
