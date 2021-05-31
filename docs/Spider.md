@@ -1,12 +1,11 @@
 ![](images/Spider_main.jpg)
-
-# 1. Product Introduction
+## 1. Product Introduction
 
 SPIDER is a small but powerful 3D printer control board. In a limited space, it integrates 8 stepper motor drives, 5A 12V power supply, 8A 5V power supply, which provides powerful energy for fans of various voltages, various RGB light strips and Raspberry Pi.
 You can build a 3D printer with rich functions through SPIDER. Especially for VORON V2.4, we cooperated with the VORON team in the early stage of design, and many features have been recognized by the VORON team. If you are building VORON, this will be your best choice.
 
 
-# 2. Features
+## 2. Features
 
 - Compact size: 155.3mm x 76.5mm
 - **Based on STM32F446 180Mhz，all IOs can withstand 5V voltage**
@@ -27,20 +26,29 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
 - EXP1 & EXP2 have more multiplexing functions, such as USART, I2C, CAN
 - SD card & USB upload support
 - A 4.7kOhm 0.1% temperature sensor pull up resistor is used, PT1000 can be connected directly. For PT100, an amplifier board must be used.
-# 3. Haredware Guide
+## 3. Haredware Guide
 
-## 3.1 Wiring
+### 3.1 Wiring
 
 ![](images/Spider_wiring.svg)
-## 3.2 Pin Out
+### 3.2 Pin Out
 ![](images/Spider_V1.0_Pinout.svg)
-## 3.3 注意/NOTICE
+### 3.3 注意/NOTICE
 
-​    为了兼容某些主板，如RAMPS1.4，FYSETC mini12864 设置了 RST(R3) 和 KILL(R4) 的可选择电阻。目前，有些主板（S6/Spider）将 KILL 换成 5V，此时，请确认 mini12864 上 R4处于空贴状态，否则按下屏幕上的按钮会致使 5V 与 GND 短路，长时间操作会导致主板损坏。<br/>   In order to be compatible with some motherboards, such as RAMPS1.4, mini12864 is equipped with RST (R3) and KILL (R4) optional resistors. At present, some motherboards (S6/Spider) change the KILL to 5V. At this time, please make sure that R4 on the mini12864 is in the empty state, otherwise pressing the button on the screen will cause a short circuit between 5V and GND, and long-term operation will cause the motherboard to be damaged.
+<table width="100%">
+  <tr>
+    <th width="40%">sch</th>
+    <th>notice</th>
+  </tr>
+  <tr>
+    <td><img src="https://wiki.fysetc.com/images/Spider_notice.png"/></td>
+    <td>为了兼容某些主板，如RAMPS1.4，FYSETC mini12864 设置了 RST(R3) 和 KILL(R4) 的可选择电阻。目前，有些主板（S6/Spider）将 KILL 换成 5V，此时，请确认 mini12864 上 R4处于空贴状态，否则按下屏幕上的按钮会致使 5V 与 GND 短路，长时间操作会导致主板损坏。<br/>   
+        In order to be compatible with some motherboards, such as RAMPS1.4, mini12864 is equipped with RST (R3) and KILL (R4) optional resistors. At present, some motherboards (S6/Spider) change the KILL to 5V. At this time, please make sure that R4 on the mini12864 is in the empty state, otherwise pressing the button on the screen will cause a short circuit between 5V and GND, and long-term operation will cause the motherboard to be damaged.</td>
+  </tr>
+</table>
 
-<img src="images/notice.png">
 
-## 3.4 Pin Definition
+### 3.4 Pin Definition
 
 <table>
    <tr><td>Features</td><td>Spider Pin</td><td>STM32 Pin</td><td>Pin No.</td><td>Comment</td></tr>
@@ -125,14 +133,14 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
 </table>
 
 
-# 4. Firmware Guide 
-## 4.1 Marlin
+## 4. Firmware Guide 
+### 4.1 Marlin
 
-#### 4.1.1 Download Vscode + platformio
+##### 4.1.1 Download Vscode + platformio
 
 To compile the firmware , you need to install Visual Studio Code and the platformio pulg-in.
 
-#### 4.1.2 Download firmware
+##### 4.1.2 Download firmware
 
 The Marlin firmware is in the `firmware/Marlin` folder in this repository , you can also get the firmware from latest [Marlin bugfix-2.0.x branch](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x). You need to enable following define in ```configuration.h``` file  
 
@@ -142,7 +150,7 @@ then change the ```default_envs``` variant in ```platformio.ini``` file
 
 ```default_envs = FYSETC_SPIDER```
 
-#### 4.1.3 Compile the firmware
+##### 4.1.3 Compile the firmware
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
@@ -156,7 +164,7 @@ The check mark is for compiling , click it to compile.
 
 If you generate the hex file fail you may need to open vscode using Administrator Account .
 
-#### 4.1.5 <span id="jump1">Upload the firmware(SDCARD)</span>
+##### 4.1.5 <span id="jump1">Upload the firmware(SDCARD)</span>
 
 We provide several ways to upload the firmware .Uploading with SD card is our default way to update the firmware as the board already has the sdcard bootloader in it when it leave the factory. There is sdcard slot at the right side of the board. 
 
@@ -164,11 +172,11 @@ Then,copy your compiled firmware file ```firmware.bin``` or `klipper.bin`file to
 
 Note: The bootloader is in the folder named `bootloader`, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader).
 
-#### 4.1.6 <span id="jump">Upload the firmware(DFU)</span>
+##### 4.1.6 <span id="jump">Upload the firmware(DFU)</span>
 
 The other way to upload the firmware is using DFU.
 
-##### a.Download stm32cubeprogrammer 
+###### a.Download stm32cubeprogrammer 
 
 You can download it from ST website.
 
@@ -178,13 +186,13 @@ Open the STM32CubeProgrammer software.
 
 ![1574332767079](assets/S6_1574332767079.png)
 
-##### b.Enter DFU mode
+###### b.Enter DFU mode
 
 First power off the board , then jumper the BT0 to 3.3V (You can find them in the middle area of the board) , then connect the USB to the board and your computer , it will enter DFU mode . Now you can take the jumper away. 
 
 ***REMEMBER to remove the jumper if you finish uploading or it will enter DFU mode again.***
 
-##### c.Upload the firmware
+###### c.Upload the firmware
 
 Now you can connect and flash the Spider board with stm32cubeprogrammer with the following operation.
 
@@ -198,7 +206,7 @@ Do as the red number shows in the screen shot.
 4. fill in the 'Start address' with 0x8010000
 5. Start Programming
 
-## 4.2 Klipper
+### 4.2 Klipper
 
 You need to follow the Klipper [installation guide](https://www.klipper3d.org/Installation.html) to install [Klipper](https://github.com/KevinOConnor/klipper).
 
@@ -212,26 +220,26 @@ Boot address option2
 
 If Klipper future update support boot address settings for STM32F446 chips, then you can set the boot address to 0x08010000 and build Klipper yourself. Then you need to flash the spider board bootloader first. The bootloader is in the folder named `bootloader` in this repo, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader). Then you can follow [Upload the firmware(SDCARD)](#jump1) to flash your built Klipper firmware to Spider.
 
-## 4.3 RRF
+### 4.3 RRF
 **As RRF firmware requires more than 512KB of Flash space, the Spider equipped with 446 cannot meet its requirements. So Spider has another version dedicated to running RRF firmware, which uses STM32F407VGT6 MCU.**
 
-# 5. Attachments
+## 5. Attachments
 
 - [Source Files](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/hardware/Spider%20V1.0C%20SCH.pdf)
 - [Dimensions(2D)](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/hardware/Spider%20V1.0C.DWG)
 - [Dimensions(3D)](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/hardware/Spider%20V1.0C%20STEP.rar)
 - [Bootloader](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader)
 
-# 6. How to buy
+## 6. How to buy
 - [FYSETC](https://www.fysetc.com/products/pre-sale-fysetc-spider-v1-0-motherboard-32bit-controller-board-tmc2208-tmc2209-3d-printer-part-replace-skr-v1-3-for-voron?variant=39404109267119)
 - [Aliexpress](https://www.aliexpress.com/item/1005002324070189.html)
-# 7. Tech Support
+## 7. Tech Support
 You can submit issue in our github https://github.com/FYSETC/FYSETC-SPIDER/issues
 Or submit any technical issue into our [forum](http://forum.fysetc.com/) 
 
 
 
-# Spider To-Do List:
+## Spider To-Do List:
 
 **Introduction**
 This document introduces the use of Spider in detail, which will be designed by FYSETC and completed by your crowdsourcing.
