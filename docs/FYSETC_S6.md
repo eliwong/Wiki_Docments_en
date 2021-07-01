@@ -211,6 +211,8 @@ The UART socket next to the limit switch can be used to connect serial devices s
 
 ---
 
+### Marlin
+
 #### Download Vscode + platformio
 
 To compile the firmware , you need to install Visual Studio Code and the platformio pulg-in.
@@ -219,7 +221,7 @@ To compile the firmware , you need to install Visual Studio Code and the platfor
 
 ##### S6 v1.2
 
-You can download the firmware from https://github.com/FYSETC/Marlin-2.0.x-FYSETC/tree/S6/MASTER, and if you want to know what we have changed , we recommend to use git to get the code .
+The firmware is in the `firmware` folder in this repository, and if you want to know what we have changed , we recommend to use git to get the code .
 
 If you want to have latest feature of Marlin , we recommend to use latest [Marlin bugfix-2.0.x branch](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x) , after downloading ,you need to enable following define in ```configuration.h``` file  
 
@@ -227,27 +229,35 @@ If you want to have latest feature of Marlin , we recommend to use latest [Marli
 
 then change the ```default_envs``` variant in ```platformio.ini``` file
 
-```default_envs = FYSETC_S6```
+```default_envs = FYSETC_S6``` (For old bootloader,boot address is `0x10000`, see below)
+
+```default_envs = FYSETC_S6_8000``` (For new bootloader,boot address is `0x8000`, see below)
+
+**Note: The bootloader boot address have been change to `0x8000` since 2021/06/23, you can check bootloader details [here](https://github.com/FYSETC/FYSETC-S6/tree/main/bootloader), and you can check the Marlin PR [here](https://github.com/MarlinFirmware/Marlin/pull/22207).**
 
 ##### S6 v2.0
 
-If you are using S6 v2.0 , you can get the firmware from latest [Marlin bugfix-2.0.x branch](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x) , then enable following define in ```configuration.h``` file  
+The firmware is in the `firmware` folder in this repository , you can also get the firmware from latest [Marlin bugfix-2.0.x branch](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x). You need to enable following define in ```configuration.h``` file  
 
 ```#define MOTHERBOARD BOARD_FYSETC_S6_V2_0```
 
 then change the ```default_envs``` variant in ```platformio.ini``` file
 
-```default_envs = FYSETC_S6```
+```default_envs = FYSETC_S6``` (For old bootloader,boot address is `0x10000`, see below)
+
+```default_envs = FYSETC_S6_8000``` (For new bootloader,boot address is `0x8000`, see below)
+
+**Note: The bootloader boot address have been change to `0x8000` since 2021/06/23, you can check bootloader details [here](https://github.com/FYSETC/FYSETC-S6/tree/main/bootloader), and you can check the Marlin PR [here](https://github.com/MarlinFirmware/Marlin/pull/22207).**
 
 #### Compile the firmware
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-![1561099422559](images/AIO_f1.png)
+![1561099422559](images\AIO_f1.png)
 
 If everything goes fine , at the bottom you can see several buttons
 
-![1561099546202](images/AIO_f2.png)
+![1561099546202](images\AIO_f2.png)
 
 The check mark is for compiling , click it to compile.
 
@@ -257,7 +267,9 @@ If you generate the hex file fail you may need to open vscode using Administrato
 
 We provide several ways to upload the firmware .Uploading with SD card is our default way to update the firmware as the board already has the sdcard bootloader in it when it leave the factory. If you choose to upload the firmware with a sdcard. First you need to connect a sdcard module to the S6 EXP2 port. Basically , you can use any kind of LCD screen that contain sdcard module. But if you can't make it work , check if your sdcard module's SPI CS pin connected to PA4 pin in S6 board .
 
-Then,copy your compiled firmware file "firmware.bin" file to the SD card , and insert it to the SD card module , and then power on the board. You may need to wait for about 30s to finish uploading. 
+Then,copy your compiled firmware file ```firmware.bin``` file to the SD card , and insert it to the SD card module , and then power on the board. You may need to wait for about 30s to finish uploading. 
+
+Note: The bootloader is in the folder named `bootloader`, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-S6/tree/main/bootloader).
 
 #### Upload the firmware(DFU)
 
@@ -271,7 +283,7 @@ https://www.st.com/zh/development-tools/stm32cubeprog.html
 
 Open the STM32CubeProgrammer software.
 
-![1574332767079](images/S6_1574332767079.png)
+![1574332767079](images\S6_1574332767079.png)
 
 ##### 2.Enter DFU mode
 
@@ -281,7 +293,7 @@ First power off the board , then push the Boot0 button and hold it , then connec
 
 S6 v2.0
 
-First power off the board , then jumper the Boot0 to 3.3v, then connect the USB to the board and your computer , it will enter DFU mode .
+First power off the board , then jumper the Boot0 to 3.3V , then connect the USB to the board and your computer , it will enter DFU mode . Now you can loose you hand from Boot0 button. 
 
 ***REMEMBER to remove the jumper if you finish uploading or it will enter DFU mode again.***
 
@@ -289,7 +301,7 @@ First power off the board , then jumper the Boot0 to 3.3v, then connect the USB 
 
 Now you can connect and flash the S6 board with stm32cubeprogrammer with the following operation.
 
-![1574386395071](images/S6_1574386395071.png)
+![1574386395071](images\S6_1574386395071.png)
 
 Do as the red number shows in the screen shot.
 
@@ -299,7 +311,7 @@ Do as the red number shows in the screen shot.
 
 3. Choose the "firmware.bin" file.
 
-4. fill in the 'Start address' with 0x8010000
+4. fill in the 'Start address' with `0x8008000` (If your platformio env is `default_envs = FYSETC_S6`, then you need to set it to `0x8010000`, in klipper if your boot address is `32k` then set it `0x8008000`, if 64k , set it `0x8010000`)
 
 5. Start Programming
 
