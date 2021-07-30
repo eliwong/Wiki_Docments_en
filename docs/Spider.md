@@ -1,4 +1,5 @@
 ![](images/Spider_main.jpg)
+
 ## 1. Product Introduction
 
 SPIDER is a small but powerful 3D printer control board. In a limited space, it integrates 8 stepper motor drives, 5A 12V power supply, 8A 5V power supply, which provides powerful energy for fans of various voltages, various RGB light strips and Raspberry Pi.
@@ -28,11 +29,15 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
 - A 4.7kOhm 0.1% temperature sensor pull up resistor is used, PT1000 can be connected directly. For PT100, an amplifier board must be used.
 ## 3. Haredware Guide
 
-### 3.1 Wiring
+### 3.1 Spider v1.0 wiring
 
-![](images/Spider_wiring.svg)
+![](images/Spider_v1.0_wiring.jpg)
 
-### 3.2 Wiring : FYSETC mini 12864 v2.1 
+### 3.2 Spider v1.1 wiring
+
+![](images/Spider_v1.1_wiring.jpg)
+
+### 3.3 Wiring : FYSETC mini 12864 v2.1 
 
 ####  注意/NOTICE
 
@@ -42,15 +47,20 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
 
   目前发现有些主板在接上 mini12864，并采用 USB 进行烧录时会导致无法烧录的情况，请去除 R1 10K 电阻。<br>At the moment , some Spider can't upload the firmware using USB if mini12864 is connected to the board, if you run into this issue, please remove R1  resistor.
 
-### 3.3 Wiring : TMC2209
+![](images/mini12864-1.jpg)
+
+| ![](images/mini12864-2.jpg) | ![](images/mini12864-3.jpg) |
+| --------------------------- | --------------------------- |
+
+### 3.4 Wiring : TMC2209
 
  ![](images/SPIDER-S6-TMC2209.JPG)
 
-### 3.4 Pin Out
+### 3.5 Pin Out
 
-![](images/Spider_V1.0_Pinout.svg)
+![](images/Spider_V1.0_Pinout.jpg)
 
-### 3.5 Pin Definition
+### 3.6 Pin Definition
 
 <table>
    <tr><td>Features</td><td>Spider Pin</td><td>STM32 Pin</td><td>Pin No.</td><td>Comment</td></tr>
@@ -133,126 +143,205 @@ You can build a 3D printer with rich functions through SPIDER. Especially for VO
    <tr><td rowspan="3">SWD Debug</td><td></td><td>PA13/SWDIO</td><td>72</td><td>only used for debugging now and can be used for other purposes.</td></tr>
    <tr><td></td><td>PA14/SWCLK</td><td>76</td><td>only used for debugging now and can be used for other purposes.</td></tr>
 </table>
-
-
 ## 4. Firmware Guide 
-1. ## 4.1 Marlin
+## 4.1 Marlin
 
-   ### 4.1.1 Download Vscode + platformio
+### 4.1.1 Download Vscode + platformio
 
-   To compile the firmware , you need to install Visual Studio Code and the platformio pulg-in.
+To compile the firmware , you need to install Visual Studio Code and the platformio pulg-in.
 
-   ### 4.1.2 Download firmware
+### 4.1.2 Download firmware
 
-   The Marlin firmware is in the `firmware/Marlin` folder in this repository , you can also get the firmware from latest [Marlin bugfix-2.0.x branch](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x). You need to enable following define in ```configuration.h``` file  
+The Marlin firmware is in the `firmware/Marlin` folder in this repository , you can also get the firmware from latest [Marlin bugfix-2.0.x branch](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x). You need to enable following define in ```configuration.h``` file  
 
-   ```#define MOTHERBOARD BOARD_FYSETC_SPIDER```
+`#define MOTHERBOARD BOARD_FYSETC_SPIDER`
 
-   ```default_envs = FYSETC_S6``` (For old bootloader,boot address is `0x10000`, see below)
+`default_envs = FYSETC_S6` (For old bootloader,boot address is `0x10000`, see below)
 
-   ```default_envs = FYSETC_S6_8000``` (For new bootloader,boot address is `0x8000`, see below)
+`default_envs = FYSETC_S6_8000` (For new bootloader,boot address is `0x8000`, see below)
 
-   **Note: The bootloader boot address have been change to `0x8000` since 2021/06/23, you can check bootloader details [here](https://github.com/FYSETC/FYSETC-S6/tree/main/bootloader), and you can check the Marlin PR [here](https://github.com/MarlinFirmware/Marlin/pull/22207).**
+**Note: The bootloader boot address have been change to `0x8000` since 2021/06/23, you can check bootloader details [here](https://github.com/FYSETC/FYSETC-S6/tree/main/bootloader), and you can check the Marlin PR [here](https://github.com/MarlinFirmware/Marlin/pull/22207).**
 
-   ### 4.1.3 Compile the firmware
+### 4.1.3 Compile the firmware
 
-   Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
+Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-   ![1561099422559](images\AIO_f1.png)
+![1561099422559](images\AIO_f1.png)
 
-   If everything goes fine , at the bottom you can see several buttons
+If everything goes fine , at the bottom you can see several buttons
 
-   ![1561099546202](images\AIO_f2.png)
+![1561099546202](images\AIO_f2.png)
 
-   The check mark is for compiling , click it to compile.
+The check mark is for compiling , click it to compile.
 
-   If you generate the hex file fail you may need to open vscode using Administrator Account .
+If you generate the hex file fail you may need to open vscode using Administrator Account .
 
-   ### 4.1.5 <span id="jump1">Upload the firmware(SDCARD)</span>
+### 4.1.4 Upload firmware
 
-   We provide several ways to upload the firmware .Uploading firmware using SD card is our default way to update the firmware as Spider already has the bootloader in it when it leave the factory. But if you once upload the firmware to Spider flash address `0x08000000`, then the bootloader in Spider will be gone, you need to upload the bootloader to Spider yourself. The bootloader is in the folder named `bootloader`, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader).
+Follow Firmware Update guide [here](#jump0).
 
-   Then,copy your compiled firmware file ```firmware.bin```(If you use klipper firmware, you need to rename `klipper.bin` to `firmware.bin`) file to the SD card , and insert it to the SD card slot which is at the right side of the board, and then power up the board. You may need to wait for about 30s to finish uploading, there is LED beside the sdcard slot blinking when it is uploading. 
-
-   ### 4.1.6 <span id="jump">Upload the firmware(DFU)</span>
-
-   The other way to upload the firmware is using DFU.
-
-   #### a.Download stm32cubeprogrammer 
-
-   You can download it from ST website.
-
-   https://www.st.com/zh/development-tools/stm32cubeprog.html
-
-   Open the STM32CubeProgrammer software.
-
-   ![1574332767079](images\S6_1574332767079.png)
-
-   #### b.Enter DFU mode
-
-   1. First power off the board
-   2. Then close BT0 to 3.3V pin (You can find them in the middle area of the board)  with a jumper
-   3. Connect USB cable to the board and your computer 
-   4. Power up the board
-
-   Now the board is in DFU mode. 
-
-   ***REMEMBER to remove the jumper if you finish uploading firmware or it will enter DFU mode again.***
-
-   #### c.Upload the firmware
-
-   Now you can connect and flash the Spider board with stm32cubeprogrammer with the following operation.
-
-   ![1574386395071](images\S6_1574386395071.png)
-
-   Do as the red number shows in the screen shot.
-
-   1. Click the button to find the DFU port.
-   2. Connect the DFU 
-   3. Choose the "firmware.bin" file.
-   4. Fill in the 'Start address' with 0x8008000 (If your platformio env is `default_envs = FYSETC_S6`, then you need to set it to `0x8010000`, in klipper if you choose boot address `32k` then set it `0x8008000`, if 64k , set it `0x8010000`, yes , you need different bootloader [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader))
-   5. Start Programming
-
-### 4.2 Klipper
+## 4.2 Klipper
 
 You need to follow the Klipper [installation guide](https://www.klipper3d.org/Installation.html) to install [Klipper](https://github.com/KevinOConnor/klipper).
 
-When calling "menuconfig", enable "extra low-level configuration setup" and select the "12MHz crystal" as clock reference. 
+When calling `make menuconfig`, please select below options
 
-### Boot address no
+### 4.2.1 menuconfig
 
-If you choose boot address setting `no` in Klipper, then you can follow [Upload the firmware(DFU)](#jump) to upload the firmware to Spider board. **But you need to set the 'Start address' to 0x08000000**. So the sequence be 
+- #### Enable `extra low-level configuration options`
+
+- #### Micro-controller Architecture
+
+Select `STMicroelectronics STM32`
+
+- #### Processor model
+
+Select `STM32F446`
+
+- #### Clock reference
+
+Select `12 MHz crystal`
+
+- #### Bootloader offset
+
+- ##### 1. Boot address no
+
+
+If you choose `No bootloader` bootloader offset in Klipper `make menuconfig`, then you can follow [Upload the firmware(DFU)](#jump) to upload the firmware to Spider board. **But you need to set the 'Start address' to 0x08000000**. So the sequence be 
 
 1. Click the button to find the DFU port.
 2. Connect the DFU 
 3. Choose the "klipper.bin" file.
-4. fill in the 'Start address' with 0x8000000
+4. fill in the 'Start address' with 0x08000000
 5. Start Programming
 
-We have two pre-build firmwares for you  [klipper.bin](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) and [klipper-UART0.bin](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) (The differences between two firmware , you can check README [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper)). But it will be outdated as time pass. We will try to catch up with Klipper, but i recommend to build the firmware yourself.
+We have two pre-build firmwares for you  [klipper-USB.bin](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) and [klipper-UART.bin](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) (The differences between two firmware , you can check README [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper)). But it will be outdated as time pass. We will try to catch up with Klipper, but i recommend to build the firmware yourself.
 
-### Boot address 32k
+![image-20210705151440643](images\menuconfig1.png)
 
-You can also choose `32k` boot address in Klipper. Then you need to flash the spider board bootloader named `Bootloader_FYSETC_SPIDER` first. The bootloader is in the folder named `bootloader` in github repo, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader). Then you can follow [Upload the firmware(SDCARD)](#jump1) to flash your built Klipper firmware to Spider.
+- ##### 2. Boot address 32k
 
-### Boot address 64k
 
-You can also choose `64k` boot address in Klipper. Then you need to flash the spider board bootloader named `Bootloader_FYSETC_SPIDER_10000` first. The bootloader is in the folder named `bootloader` in github repo, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader). Then you can follow [Upload the firmware(SDCARD)](#jump1) to flash your built Klipper firmware to Spider.
+If you choose `32k` bootloader offset in Klipper `make menuconfig`. Then you need to flash the spider board bootloader named `Bootloader_FYSETC_SPIDER` first, we recommend you to use this bootloader as we already change default bootloader offset from `64k` to `32k` since `2021/06/23`. The bootloader is in the folder named `bootloader` in this repo, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader). Then you can follow [Upload the firmware(SDCARD)](#jump1) to flash your built Klipper firmware to Spider. We provide pre-build firmwares named `klipper-32k-USB.bin` and `klipper-32k-UART.bin` for you [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper).
 
-### 4.3 RRF
-**As RRF firmware requires more than 512KB of Flash space, the Spider equipped with 446 cannot meet its requirements. So it needs to disable some features to make it work, please check the README in github [firmware/RRF](firmware/RRF) path.**
+![image-20210705151337765](images\menuconfig2.png)
 
-## 5. Attachments
+- ##### 3. Boot address 64k
+
+
+If you choose `64k` bootloader offset in Klipper `make menuconfig`. Then you need to flash the spider board bootloader named `Bootloader_FYSETC_SPIDER_10000` first. The bootloader is in the folder named `bootloader` in this repo, please follow the README in [bootloader folder](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader). Then you can follow [Upload the firmware(SDCARD)](#jump1) to flash your built Klipper firmware to Spider. We provide pre-build firmwares named `klipper-64k-USB.bin` and `klipper-64k-UART.bin` for you [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper).
+
+![image-20210705151951142](images\menuconfig3.png)
+
+- #### Communication interface
+
+- ##### 1. USB (on PA11/PA12)
+
+If you want to connect Spider to RaspberryPI with USB cable. You need to select `USB (on PA11/PA12)`
+
+![image-20210705154413053](images\ci1.png)
+
+And in `printer.cfg` you need to set the serial as below. We provide an example cfg file `printer.cfg` for VORON 2 machine [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper).
+
+```
+Obtain definition by "ls -l /dev/serial/by-id/" then unplug to verify
+##--------------------------------------------------------------------
+serial: /dev/serial/by-id/usb-Klipper_stm32f446xx_230032000851363131363530-if00
+```
+
+- ##### 2. Serial (on USART1 PA10/PA9)
+
+If you want to connect Spider UART1(RX1:PA10, TX1:PA9) port to RPI  uart0(TX:GPIO14,RX:GPIO15) port, you need to select `Serial (on USART1 PA10/PA9)`
+
+![image-20210705154625673](images\ci2.png)
+
+In `printer.cfg` you need to uncomment the following line as our example `printer.cfg` file [here](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/Klipper) do, if your cfg file don't have this line, please add it.
+
+```
+serial: /dev/ttyAMA0
+```
+
+Besides this make option, you still need to follow the instructions that `Connect RPI uart.md` file says, you can find the file [here](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/firmware/Klipper/Connect%20RPI%20uart.md).
+
+### 4.2.2 Compile firmware
+
+```
+make
+```
+
+### 4.2.3 Upload firmware
+
+Follow Firmware Update guide [here](#jump0).
+
+## 4.3 RRF
+
+**As RRF firmware requires more than 512KB of Flash space, the Spider equipped with 446 cannot meet its requirements. So it needs to disable some features to make it work, please check the [README](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/firmware/RRF) in firmware/RRF folder.**
+
+## 4.4  <span id="jump0">Firmware Upload</span>
+
+### 4.4.1 <span id="jump1">Upload the firmware(SDCARD)</span>
+
+We provide several ways to upload the firmware .Uploading firmware using SD card is our default way to update the firmware as Spider already has the bootloader in it when it leave the factory. But if you once upload the firmware to Spider flash address `0x08000000`, then the bootloader in Spider will be gone, then you need to upload the bootloader to Spider yourself, please follow the README in bootloader folder ([github](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader) or [gitee](https://gitee.com/fysetc/FYSETC-SPIDER/tree/main/bootloader)) to upload the bootloader.
+
+Copy your compiled firmware file ```firmware.bin```(If you use klipper firmware, you need to rename `klipper.bin` to `firmware.bin`) file to the SD card , and insert it to the SD card slot which is at the right side of the board, and then power up the board. You may need to wait for about 30s to finish uploading, there is LED beside the sdcard slot blinking when it is uploading. 
+
+### 4.4.2 <span id="jump">Upload the firmware(DFU)</span>
+
+The other way to upload the firmware is using DFU.
+
+#### a.Download stm32cubeprogrammer 
+
+You can download it from ST website.
+
+https://www.st.com/zh/development-tools/stm32cubeprog.html
+
+Open the STM32CubeProgrammer software.
+
+![1574332767079](images\S6_1574332767079.png)
+
+#### b.Enter DFU mode
+
+1. First power off the board
+2. Then close BT0 to 3.3V pin (You can find them in the middle area of the board)  with a jumper
+3. Connect USB cable to the board and your computer 
+4. Power up the board
+
+Now the board is in DFU mode. 
+
+***REMEMBER to remove the jumper if you finish uploading firmware or it will enter DFU mode again.***
+
+#### c.Upload the firmware
+
+Now you can connect and flash the Spider board with stm32cubeprogrammer with the following operation.
+
+![1574386395071](images\S6_1574386395071.png)
+
+Do as the red number shows in the screen shot.
+
+1. Click the button to find the DFU port.
+2. Connect the DFU 
+3. Choose the "firmware.bin" file.
+4. Fill in the 'Start address' with 0x08008000 (If your platformio env is `default_envs = FYSETC_S6`, then you need to set it to `0x08010000`, in klipper if you choose boot address `32k` then set it `0x08008000`, if `64k` , set it `0x08010000`, yes , you need different bootloader [github](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader) or [gitee](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader).
+5. Start Programming
+
+## 5. Issue shot
+
+### 5.1 Spider 3.3v issue
+
+Please check [here](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/Spider%203.3v%20issue.md).
+
+## 6. Attachments
 
 - [Source Files](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/hardware/Spider%20V1.0C%20SCH.pdf)
 - [Dimensions(2D)](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/hardware/Spider%20V1.0C.DWG)
 - [Dimensions(3D)](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/hardware/Spider%20V1.0C%20STEP.rar)
 - [Bootloader](https://github.com/FYSETC/FYSETC-SPIDER/tree/main/bootloader)
 
-## 6. How to buy
+## 7. How to buy
 - [FYSETC](https://www.fysetc.com/products/pre-sale-fysetc-spider-v1-0-motherboard-32bit-controller-board-tmc2208-tmc2209-3d-printer-part-replace-skr-v1-3-for-voron?variant=39404109267119)
+- [Taobao](https://item.taobao.com/item.htm?spm=a230r.1.14.30.511751bfpMtaWP&id=649360814769&ns=1&abbucket=18#detail)
 - [Aliexpress](https://www.aliexpress.com/item/1005002324070189.html)
-## 7. Tech Support
+## 8. Tech Support
 You can submit issue in our github https://github.com/FYSETC/FYSETC-SPIDER/issues
 Or submit any technical issue into our [forum](http://forum.fysetc.com/) 
 

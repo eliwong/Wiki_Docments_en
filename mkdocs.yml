@@ -158,10 +158,12 @@ nav:
     - ST820 V1.0: ST820_V1.0.md
     - LV8729 V1.0: LV8729_V1.0.md
         
+- Modules:
+    - PT100_Stick Introduction: PT100_STICK.md
+    
 - Cables and Wires:
     - Cables and Wires Introduction: Cables and Wires.md
     
-
 - Mechanical parts:
     - Mechanical parts Introduction: Mechanical parts.md
     - CREALITY X-axis Belt Tensioner: CREALITY X-axis Belt Tensioner.md
