@@ -1,77 +1,112 @@
-## Product Introduction
+# FYSETC-PT100Stick
 
----
+FYSETC-PT100Stick is a Pololu formfactor MAX31865 breakboard for FYSETC S6/Spider and similar 32 bit 3D printer control boards. It is base on VORON [PT100Stick](https://github.com/VoronDesign/Voron-Hardware/tree/master/PT100Stick).
 
 <img src="assets/PT100_STICK V1.0.png" alt="PT100_STICK V1.0" style="zoom:50%;" />
 
-The SureStepr SD6128 is a stepper driver board based on the THB6128 chip. It is simple to use and operate using an indexer (DIR/STEP) interface to move the stepper motors. The SD6128 is a drop-in replacement for Pololu style footprint drivers including the SD8825, A4988, A4983 and Stepsticks. One distinct feature of the SD6128 is that heat pad is located at the top of the chip. This makes heat sinking a lot easier and does not rely on the already small PCB area for heat dissipation. 
+## 1. How to use
 
-## Features
----
+### 1.1 Set the jumpers
 
-- Made with 4 Layer RoHS PCB 
-- 1, 1/2 , 1/4, 1/8, 1/16, 1/32, 1/64 and 1/128 Microstepping
-- Up to 2.2A peak drive current 
-- Top mounted heat pad
-- Larger heat sink mounting area 
-- Easy to use DIR/Step interface
-- Output pins for Decay and external Vref
-- Driver Chip:THB6128 with over current and over temp protection
-- Current Motor Supply : 2.2A max
-- Motor Voltage: 35V max
+![1574477946366](images/jumpers.png)
 
+Then insert it to the socket.
 
-## Pin Functions
+![](images/insertion.jpg)
 
----
+### 1.2 Firmware setting
 
-![s6128-pin](images/s6128-pin.jpg)
+#### 1.2.1 Klipper firmware
 
-## Interface Resources
----
+1. SSH into your `RaspberryPi` and edit your `printer.cfg` file using `nano`.
 
-### Wiring Diagram
+2. Remove any old thermistor configuration under [extruder]. (sensor_type, sensor_pin, etc.)
 
-![s6128-wiring-diagram](images/s6128-wiring-diagram.jpg)
+3. Under [extruder] add these lines:
 
-### Motor Current Setting
+   ```
+   sensor_type: MAX31865
+   sensor_pin: PD11 # I pulg into Spider E4-MOT socket, `cs` pin is the sensor pin
+   spi_speed: 4000000
+   spi_software_sclk_pin: PE12
+   spi_software_mosi_pin: PE14
+   spi_software_miso_pin: PE13
+   rtd_nominal_r: 100
+   rtd_reference_r: 430
+   rtd_num_of_wires: 2 # Edit it according to the wires count of your PT100 sensor, like `3` or `4`.
+   ```
 
-The current limit can be adjusted by measuring VREF and turning the trimmer (see FIG.1). Connect the + of the voltmeter to VREF and the [-] lead to GND and read the value. The SD6128 uses a 0.10 ohm current sense resistor so current limit can be computed as follows: 
-Current Limit = VREF x 2
+4. If you are in EU or any 50 Hz country add this line: `rtd_use_50Hz_filter: True`
 
-!!!warning
-    DO NOT EXCEED YOUR MOTOR’S CURRENT RATING. 
+5. Save your changes by typing CTRL+X, Y, [ENTER]. Send FIRMWARE_RESTART from the console in Octoprint and test! It should work.
 
-### Micro-stepping
+6. Run PID tuning. PT100 readings will be different from your previous thermistor. For the best thermal accuracy, follow this to PID tune:
 
-Table shows jumper settings for micro stepping.
-OFF = No Jumper （0）
-ON = Jumpered （1）
+   ```
+   1. Heat your bed to 100C.
+   2. Move your hothend to the center and 5-10 mm above bed
+   3. Set fans to 25%: "M106 S64"
+   4. Run: "PID_CALIBRATE HEATER=extruder TARGET=245"
+   5. This will run for a few minutes. When finished, save with: "SAVE_CONFIG"
+   ```
 
-&nbsp;| 1| 1/2|	1/4|	1/8|	1/16|1/32 |1/64 |1/128
-:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
-MS1(M0) | OFF |	ON | OFF | ON | OFF | ON |OFF | ON 
-MS2(M1) | OFF |	OFF | ON | ON | OFF | OFF | ON | ON 
-MS3(M2) | OFF |	OFF | OFF | OFF | ON | ON | ON | ON 
+#### 1.2.2 Marlin firmware
 
-## Attention
----
+##### Step 1: Change pins file
 
-!!!Warning
-    <font color="red">This module is sensitive device, do not use without heat sink!!!</font>
+Add the follow lines to `pins_FYSETC_SPIDER.h` before `#endif` line.
 
-- Static sensitive - Handle with care, remove from packaging only when ready to mount. 
-- Check munting orientation before inserting. Drivers will be damaged when improperly inserted, can potentially damage host controller too. 
-- Turn off power when connecting/disconnecting motors, Do not insert driver when main board is powered.
-- Chip, heat pad and heat sink can get really hot, avoid touching while in operation. 
-- Install heatsink with adhesive thermal pad, ensure that it does not come in contact with pins or any other conductive part of the board.
+```
+#define Thermo_SCK_PIN           PE12//SCK
+#define Thermo_do_PIN            PE13//MISO
+#define Thermo_CS1_PIN           PD11//CS1 E4_CS_PIN
+#define Thermo_CS2_PIN           -1//CS2
+#define MAX31865_MOSI_PIN        PE14
 
-## Shop
+#define MAX6675_SS_PIN           Thermo_CS1_PIN
+#define MAX6675_SS2_PIN          Thermo_CS2_PIN
+#define MAX6675_SCK_PIN          Thermo_SCK_PIN
+#define MAX6675_DO_PIN           Thermo_do_PIN  
+```
 
----
-- [s6128]
+You need to change `Thermo_CS1_PIN` to related `cs` if you insert `PT100Stick` to other stepper driver socket.
 
-##Tech Support
+| CS        | pin  |
+| --------- | ---- |
+| X-CS/PDN  | PE7  |
+| Y-CS/PDN  | PE15 |
+| Z-CS/PDN  | PD10 |
+| E0-CS/PDN | PD7  |
+| E1-CS/PDN | PC14 |
+| E2-CS/PDN | PC15 |
+| E3-CS/PDN | PA15 |
+| E4-CS/PDN | PD11 |
 
----
-Please submit any technical issue into our [forum](http://forum.fysetc.com/) 
+##### Step 2:  Change `configuration.h` file
+
+```
+#define TEMP_SENSOR_0 -5
+```
+
+```
+#define MAX31865_SENSOR_OHMS_0      100   // (Ω) Typically 100 or 1000 (PT100 or PT1000)
+#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for AdaFruit PT100; 4300 for AdaFruit PT1000
+```
+
+## 2. Toubleshooting
+
+- ADC_OUT_OF_RANGE
+  - If you never get a reading; check your wiring.
+  - If you get this error after some time; first try adding a capacitor (explained below), if it doesn’t help, try shielded wires or a 3-wire sensor.
+- Under & Over Voltage
+  - Possibly a wiring issue, check wiring, replace with thicker wires if possible.
+  - Possibly a software SPI issue, try using a Pi MCU (explained below) for troubleshooting.
+  - Possibly electrical noise issue, try adding a capacitor (explained below).
+  - If nothing helps, try shielded wires or a 3-wire sensor.
+- RTD_INPUT_DISCONNECTED
+  - Wiring issue, check your wires.
+
+## 3. Related doc
+
+https://docs.vorondesign.com/community/electronics/xbst_/PT100.html
+
