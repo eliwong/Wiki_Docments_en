@@ -1,442 +1,305 @@
+# Cheetah v2.0
+
+![img](images/Cheetah_v20.jpg)
+
 ## 1. Product Introduction
-
----
-
-![(images/Cheetah_V1.2b_real.png)
-
-![image-20211109091856977](assets/image-20211109091856977.png)
-
-猎豹2.0是基于STM32F401的一个单头主控制板，板载4路TMC2209，支持无限位开关复位，可连接多种显示屏，兼容创想三维大多数机器的安装尺寸，同时也适用于一般3D打印机DIY。
 
 Cheetah 2.0 is a single-head main control board based on STM32F401, with 4 TMC2209 onboard, supports sensor-less homing, can be connected to a variety of displays, compatible with the installation size of most of the Creality 3D machines, such as ender3, ender3 V2, ender3 pro, ender5, and is also suitable for general 3D printers DIY.
 
 ## 2. Features
----
 
 - Compact size: 101.5mm x 72mm，Compatible with the Creatlity ender 3 motherboard size
-
-- fully integrated all in one solution:
-  - STM32F103 MCU (Run Marlin 2.0 )
-  - CH340 for high speed USB serial connection 
-  - (V1.1)4X TMC2209 stepper drivers, Support sensor-less homing
-  - (V1.2)4X TMC2208 stepper drivers, not support sensor-less homing
-
-- UNIVERSAL POWER:
-  - can be used with 7V-35V for motors / heated bed
-  - (V1.2)24V to 12V/2A DC-DC for fans
-  - integrated high precision power regulators (DC/DC):  5V 1A Max and 3.3V  600mA Max LDO
-
-- Onboard TF card socket
-- EXP1 for 12864 display panel (Creality 12864 panel or FYSETC Generic12864)
-- Onboard RGB control (V1.2 have no RGB control)
-- RGB control and fan control 12V/24V optional (Requires 24V to 12V module)
-- PCB：
-  - High quality, High temperature FR4-TG130 PCB
-  - Gold ENIG finishing
+- Fully integrated all in one solution: 
+- **STM32F401MCU (Run Marlin 2.0****/****Klipper** **)** 
+- 4X TMC2209 stepper drivers, Support sensor-less homing
+- UNIVERSAL POWER: 
+- ​    Can be used with 12V/24V for motors / heated bed 
+- ​    24V to 12V/2A DC-DC for fans 
+- ​    Integrated high precision power regulators (DC/DC): 5V 2A Max and 3.3V 600mA Max LDO 
+- ​    12V&24V power pin out 
+- Onboard TF card socket- EXP3 for 12864 display panel (Creality 12864 panel or FYSETC Generic12864)
+- **EXP1&EXP2 RepRapDiscount SmartController compatible pin header on board**
+- **EXP4 with I2C and UART1**
+- Onboard 5V WS2812 RGB control 
+- SD card & USB upload support
+- Car fuses for main power input
+- **Up to 3 ways PWM fans** **(5/12/24 Optional)**
+- PCB： FR4-TG155 PCB - Gold ENIG finishing
 
 ## 3. Application
----
 
 - 3D printer 
 - CNC Device
 - Other similar machines
+- Voron 0.1([github](https://github.com/FYSETC/FYSETC-Voron-0) [gitee](https://gitee.com/fysetc-mirrors/FYSETC-Voron-0))
 
 ## 4. Hardware
 
 ### 4.1 Hardware Reasources
 
----
-
-| Board Name           | Cheetah                                              |
+| Board Name           | Cheetah v2.0                                         |
 | -------------------- | ------------------------------------------------ |
 | License              | GPL V2.0                                       |
-| Latest Version       | V1.0                                           |
+| Latest Version       | V2.0                                           |
 | Extruders            | 1                                                |
-| Fixed Fans           | 2 Max                                            |
-| Controlled Fans      | 1 Max                                            |
-| Heaters              | 1 Max                                            |
+| Controlled Fans      | 3 Max                                            |
+| Heaters              | 2 Max                                            |
 | Endstops             | 3 Max                                            |
 | Temp sens            | 2 Max                                            |
+| UART | 1 |
 | I2C                  | 1                                                |
 | SWD                  | 1                                                |
-| Serial port chip     | CH340                                            |
-| CPU                  | STM32F103                                     |
-| CPU Speed ( MHz )    | 72 Mhz                                        |
-| Stepper driver       | 4X TMC2209 (V1.2 = 2208) |
-| Stepper driver  Type              | Onboard               |
+| USB   | 1                                            |
+| CPU                  | STM32F401                                  |
+| CPU Speed ( MHz )    | 84 Mhz                                       |
+| Stepper driver       | 4X TMC2209 |
+| Stepper driver Type              | Onboard               |
 | Input| 12v/24v |
 | Output| BED OUT：10A Max ；Heater Out：5A Max            |
 
-### 4.2 Connectors and jumpers define(V1.1)
----
-![Cheetah_connectors](images/Cheetah_connector.png)
-![Cheetah_jumpers](images/Cheetah_jumpers.png)
-
-### 4.3 Connectors and jumpers define(V1.2)
-
-Not available.
-
-### 4.4 Pin Definition
-
-#### 4.4.1 Cheetah V1.1
-
+### 4.2 Connectors and jumpers define
+Coming soon...
+### 4.3 Pin Definition
 <table>
    <tr><td>Features</td><td>Cheetah Pin</td><td>STM32 Pin</td><td>Pin No.</td><td>Comment</td></tr>
-   <tr><td rowspan="3">X-MOTOR(1)</td><td>X-Step</td><td>PB8</td><td>61</td><td></td></tr>
-   <tr><td>X-DIR</td><td>PB9</td><td>62</td><td></td></tr>
+   <tr><td rowspan="3">X-MOTOR(1)</td><td>X-Step</td><td>PC0</td><td>8</td><td></td></tr>
+   <tr><td>X-DIR</td><td>PC1</td><td>9</td><td></td></tr>
    <tr><td>X-EN</td><td>PA8</td><td>41</td><td></td></tr>
-   <tr><td rowspan="3">Y-MOTOR(2)</td><td>Y-Step</td><td>PB2</td><td>28</td><td></td></tr>
-   <tr><td>Y-DIR</td><td>PB3</td><td>55</td><td></td></tr>
-   <tr><td>Y-EN</td><td>PB1</td><td>27</td><td></td></tr>
-   <tr><td rowspan="3">Z-MOTOR(3)</td><td>Z-Step</td><td>PC0</td><td>8</td><td></td></tr>
-   <tr><td>Z-DIR</td><td>PC1</td><td>9</td><td></td></tr>
+   <tr><td rowspan="3">Y-MOTOR(2)</td><td>Y-Step</td><td>PC14</td><td>3</td><td></td></tr>
+   <tr><td>Y-DIR</td><td>PC13</td><td>2</td><td></td></tr>
+   <tr><td>Y-EN</td><td>PC15</td><td>4</td><td></td></tr>
+   <tr><td rowspan="3">Z-MOTOR(3)</td><td>Z-Step</td><td>PB9</td><td>62</td><td></td></tr>
+   <tr><td>Z-DIR</td><td>PB8</td><td>61</td><td></td></tr>
    <tr><td>Z-EN</td><td>PC2</td><td>10</td><td></td></tr>
-   <tr><td rowspan="3">E0-MOTOR(4)</td><td>E0-Step</td><td>PC15</td><td>4</td><td></td></tr>
-   <tr><td>E0-DIR</td><td>PC14</td><td>3</td><td></td></tr>
-   <tr><td>E0-EN</td><td>PC13</td><td>2</td><td></td></tr>
+   <tr><td rowspan="3">E0-MOTOR(4)</td><td>E0-Step</td><td>PB2</td><td>28</td><td></td></tr>
+   <tr><td>E0-DIR</td><td>PA15</td><td>50</td><td></td></tr>
+   <tr><td>E0-EN</td><td>PD2</td><td>54</td><td></td></tr>
    <tr><td rowspan="2">TMC2209 SERIAL (UART2)</td><td>TX2</td><td>PA2</td><td>16</td><td></td></tr>
    <tr><td>RX2</td><td>PA3</td><td>17</td><td></td></tr>
-   <tr><td rowspan="3">End-stops</td><td>X-MIN</td><td>PA1</td><td>15</td><td></td></tr>
-   <tr><td>Y-MIN</td><td>PB4</td><td>56</td><td></td></tr>
-   <tr><td>Z-MIN</td><td>PA15</td><td>50</td><td></td></tr>
-   <tr><td rowspan="1">FAN</td><td>FAN0</td><td>PC8</td><td>39</td><td></td></tr>
-   <tr><td rowspan="3">RGB</td><td>LED-R</td><td>PB0</td><td>26</td><td>Can be used for fan1</td></tr>
-   <tr><td>LED-G</td><td>PB7</td><td>59</td><td>Can be used for fan2</td></tr>
-   <tr><td>LED-B</td><td>PB6</td><td>58</td><td>Can be used for fan3</td></tr>
+   <tr><td rowspan="3">End-stops</td><td>X-MIN</td><td>PB4</td><td>56</td><td></td></tr>
+   <tr><td>Y-MIN</td><td>PC8</td><td>39</td><td></td></tr>
+   <tr><td>Z-MIN</td><td>PB1</td><td>27</td><td></td></tr>
+   <tr><td rowspan="3">FAN</td><td>FAN0</td><td>PA14</td><td>49</td><td></td></tr>
+   <tr><td>FAN1</td><td>PA13</td><td>46</td><td></td></tr>
+   <tr><td>FAN2</td><td>PA1</td><td>15</td><td></td></tr>
+   <tr><td rowspan="1">RGB</td><td>Neo-pixel</td><td>PB0</td><td>26</td><td>Can be used for fan4</td></tr>
    <tr><td rowspan="2">Heating</td><td>E0-Heater</td><td>PC6</td><td>37</td><td></td></tr>
    <tr><td>Heated-Bed</td><td>PC7</td><td>38</td><td></td></tr>
-   <tr><td rowspan="2">Temperature</td><td>TE0</td><td>PC4</td><td>15</td><td></td></tr>
-   <tr><td>TB</td><td>PC5</td><td>18</td><td></td></tr>
-   <tr><td rowspan="8">EXP1</td><td>BEEP</td><td>PC9</td><td>40</td><td></td></tr>
-   <tr><td>BTN_ENC</td><td>PC12</td><td>53</td><td></td></tr>
-   <tr><td>BTN_EN2</td><td>PC11</td><td>52</td><td></td></tr>
-   <tr><td>MISO</td><td>PA6/MISO2</td><td>22</td><td></td></tr>
+   <tr><td rowspan="2">Temperature</td><td>TE0</td><td>PC4</td><td>24</td><td></td></tr>
+   <tr><td>TB</td><td>PC5</td><td>25</td><td></td></tr>
+   <tr><td rowspan="10">EXP1</td><td>SD-MISO</td><td>PA6</td><td>22</td><td></td></tr>
+   <tr><td>SD-SCK</td><td>PA5</td><td>21</td><td></td></tr>
    <tr><td>BTN_EN1</td><td>PC10</td><td>51</td><td></td></tr>
-   <tr><td>SCK</td><td>PA5/SCK2</td><td>21</td><td></td></tr>
-   <tr><td>CS</td><td>PA4</td><td>20</td><td></td></tr>
-   <tr><td>MOSI</td><td>PA7/MOSI2</td><td>23</td><td></td></tr>
+   <tr><td>SD-SS</td><td>PA4</td><td>20</td><td></td></tr>
+   <tr><td>BTN_EN2</td><td>PC11</td><td>52</td><td></td></tr>
+   <tr><td>SD-MOSI</td><td>PA7</td><td>23</td><td></td></tr>
+   <tr><td>SD-DET</td><td>PC3</td><td>11</td><td></td></tr>
+   <tr><td>RESET</td><td>NRST</td><td>7</td><td></td></tr>
+   <tr><td>GND</td><td>GND</td><td>NA</td><td></td></tr>
+   <tr><td>5V</td><td>5V</td><td>NA</td><td></td></tr>
+   <tr><td rowspan="10">EXP2</td><td>BEEP</td><td>PC9</td><td>40</td><td></td></tr>
+   <tr><td>BTN_ENC</td><td>PC12</td><td>53</td><td></td></tr>
+   <tr><td>LCD_EN</td><td>PB15</td><td>36</td><td></td></tr>
+   <tr><td>LCD_RS</td><td>PB12</td><td>33</td><td></td></tr>
+   <tr><td>LCD_D4</td><td>PB13</td><td>34</td><td></td></tr>
+   <tr><td>LCD_D5</td><td>PB14</td><td>35</td><td></td></tr>
+   <tr><td>LCD_D6</td><td>PB6</td><td>58</td><td></td></tr>
+   <tr><td>LCD_D7</td><td>PB7</td><td>59</td><td></td></tr>
+   <tr><td>GND</td><td>GND</td><td>NA</td><td></td></tr>
+   <tr><td>5V</td><td>5V</td><td>NA</td><td></td></tr>
    <tr><td rowspan="2">UART</td><td>TX</td><td>PA9/TX1</td><td>42</td><td></td></tr>
    <tr><td>RX</td><td>PA10/RX1</td><td>43</td><td></td></tr>
    <tr><td rowspan="2">I2C</td><td>I2C2 SCL</td><td>PB10</td><td>29</td><td></td></tr>
    <tr><td>I2C2 SDA</td><td>PB11</td><td>30</td><td></td></tr>
-   <tr><td rowspan="3">SWD Debug</td><td>SWDIO</td><td>PA13</td><td>72</td><td>only used for debugging now and can be used for other purposes.</td></tr>
-   <tr><td>SWCLK</td><td>PA14</td><td>76</td><td>only used for debugging now and can be used for other purposes.</td></tr>
-</table>
-
-#### 4.4.2 Cheetah V1.2
-
-<table>
-   <tr><td>Features</td><td>Cheetah Pin</td><td>STM32 Pin</td><td>Pin No.</td><td>Comment</td></tr>
-   <tr><td rowspan="3">X-MOTOR(1)</td><td>X-Step</td><td>PB8</td><td>61</td><td></td></tr>
-   <tr><td>X-DIR</td><td>PB9</td><td>62</td><td></td></tr>
-   <tr><td>X-EN</td><td>PA8</td><td>41</td><td></td></tr>
-   <tr><td rowspan="3">Y-MOTOR(2)</td><td>Y-Step</td><td>PB2</td><td>28</td><td></td></tr>
-   <tr><td>Y-DIR</td><td>PB3</td><td>55</td><td></td></tr>
-   <tr><td>Y-EN</td><td>PB1</td><td>27</td><td></td></tr>
-   <tr><td rowspan="3">Z-MOTOR(3)</td><td>Z-Step</td><td>PC0</td><td>8</td><td></td></tr>
-   <tr><td>Z-DIR</td><td>PC1</td><td>9</td><td></td></tr>
-   <tr><td>Z-EN</td><td>PC2</td><td>10</td><td></td></tr>
-   <tr><td rowspan="3">E0-MOTOR(4)</td><td>E0-Step</td><td>PC15</td><td>4</td><td></td></tr>
-   <tr><td>E0-DIR</td><td>PC14</td><td>3</td><td></td></tr>
-   <tr><td>E0-EN</td><td>PC13</td><td>2</td><td></td></tr>
-   <tr><td rowspan="8">TMC2208 SERIAL</td><td>X TX</td><td>PA11</td><td>44</td><td></td></tr>
-   <tr><td>X RX</td><td>PA12</td><td>45</td><td></td></tr>
-   <tr><td>Y TX</td><td>PB6</td><td>58</td><td></td></tr>
-   <tr><td>Y RX</td><td>PB7</td><td>59</td><td></td></tr>
-   <tr><td>Z TX</td><td>PB10</td><td>29</td><td></td></tr>
-   <tr><td>Z RX</td><td>PB11</td><td>30</td><td></td></tr>
-   <tr><td>E TX</td><td>PA2</td><td>16</td><td></td></tr>
-   <tr><td>E RX</td><td>PA3</td><td>17</td><td></td></tr>
-   <tr><td rowspan="3">End-stops</td><td>X-MIN</td><td>PA1</td><td>15</td><td></td></tr>
-   <tr><td>Y-MIN</td><td>PB4</td><td>56</td><td></td></tr>
-   <tr><td>Z-MIN</td><td>PA15</td><td>50</td><td></td></tr>
-   <tr><td rowspan="2">FAN</td><td>FAN0</td><td>PC8</td><td>39</td><td></td></tr>
-   <tr><td>FAN1</td><td>PB0</td><td>26</td><td></td></tr>
-   <tr><td rowspan="2">Heating</td><td>E0-Heater</td><td>PC6</td><td>37</td><td></td></tr>
-   <tr><td>Heated-Bed</td><td>PC7</td><td>38</td><td></td></tr>
-   <tr><td rowspan="2">Temperature</td><td>TE0</td><td>PC4</td><td>15</td><td></td></tr>
-   <tr><td>TB</td><td>PC5</td><td>18</td><td></td></tr>
-   <tr><td rowspan="8">EXP1</td><td>BEEP</td><td>PC9</td><td>40</td><td></td></tr>
-   <tr><td>BTN_ENC</td><td>PC12</td><td>53</td><td></td></tr>
-   <tr><td>BTN_EN2</td><td>PC11</td><td>52</td><td></td></tr>
-   <tr><td>MISO</td><td>PA6/MISO2</td><td>22</td><td></td></tr>
-   <tr><td>BTN_EN1</td><td>PC10</td><td>51</td><td></td></tr>
-   <tr><td>SCK</td><td>PA5/SCK2</td><td>21</td><td></td></tr>
-   <tr><td>CS</td><td>PA4</td><td>20</td><td></td></tr>
-   <tr><td>MOSI</td><td>PA7/MOSI2</td><td>23</td><td></td></tr>
-   <tr><td rowspan="2">UART</td><td>TX</td><td>PA9/TX1</td><td>42</td><td></td></tr>
-   <tr><td>RX</td><td>PA10/RX1</td><td>43</td><td></td></tr>
-   <tr><td rowspan="3">SWD Debug</td><td>SWDIO</td><td>PA13</td><td>72</td><td>only used for debugging now and can be used for other purposes.</td></tr>
-   <tr><td>SWCLK</td><td>PA14</td><td>76</td><td>only used for debugging now and can be used for other purposes.</td></tr>
+   <tr><td rowspan="3">SWD Debug</td><td>SWDIO</td><td>PA13</td><td>46</td><td>only used for debugging now and can be used for other purposes.</td></tr>
+   <tr><td>SWCLK</td><td>PA14</td><td>49</td><td>only used for debugging now and can be used for other purposes.</td></tr>
 </table>
 
 ## 5. Firmware 
 
----
-
 ### 5.1 Marlin
 
-The FYSETC CHEETAH firmware is pre-config for ENDER3 machine, if you want to change the firmware or compile the code yourself , follow the steps.
+Follow the steps below to compile the firmware yourself. More information [here](https://marlinfw.org/docs/basics/auto_build_marlin.html).
 
 #### 5.1.1 Download Vscode + platformio
 
 To compile the firmware , you need to install Visual Studio Code and the platformio pulg-in.
 
-#### 5.1.2 Firmware code
+#### 5.1.2 Firmware config
 
-You have two code source choices :
+You have two code source choices
 
 ##### Source 1
 
-You can get Marlin code is in the `firmware/Marlin` folder in this repository [github](https://github.com/FYSETC/FYSETC-Cheetah/tree/master/firmware/Marlin) or [gitee](https://gitee.com/fysetc/FYSETC-Cheetah/tree/master/firmware/Marlin). 
-
-And change `MOTHERBOARD` define according to your cheetah board version in `Configuration.h`
-
-Cheetah v1.1x
-
-```
-#define MOTHERBOARD BOARD_FYSETC_CHEETAH
-```
-
-Cheetah v1.2x
-
-```
-#define MOTHERBOARD BOARD_FYSETC_CHEETAH_V12
-```
+You can get Marlin code is in the `firmware/Marlin` folder in this repository [github](https://github.com/FYSETC/FYSETC-Cheetah-v2/tree/main/firmware/Marlin) or [gitee](https://gitee.com/fysetc/FYSETC-Cheetah-v2/tree/main/firmware/Marlin). 
 
 ##### Source 2
 
-Also you can get upstream branch from [github](https://github.com/MarlinFirmware/Marlin) or [gitee](https://gitee.com/fysetc/Marlin). But remember to change `default_envs` in `platformio.ini` file.
+Also you can get upstream branch from [github](https://github.com/MarlinFirmware/Marlin) or [gitee](https://gitee.com/fysetc/Marlin) (You'd better use the bugfix-2.0.x version as i just make [PR](https://github.com/MarlinFirmware/Marlin/pull/23104)  2021/10/10, so Marlin group may not integrate the code in formal version). Remember to change `default_envs` in `platformio.ini` file.
 
 ```
-default_envs = STM32F103RC_fysetc
+default_envs = FYSETC_CHEETAH_V20
 ```
 
 And change `MOTHERBOARD` define according to your cheetah board version in `Configuration.h`
 
-Cheetah v1.1x
-
 ```
-#define MOTHERBOARD BOARD_FYSETC_CHEETAH
+#define MOTHERBOARD BOARD_FYSETC_CHEETAH_V20
 ```
 
-Cheetah v1.2x
+And serial port
 
 ```
-#define MOTHERBOARD BOARD_FYSETC_CHEETAH_V12
+#define SERIAL_PORT -1
+#define BAUDRATE 115200
 ```
 
-You'd better change your configuration base on the configuration on github [cheetah v1.1](https://github.com/MarlinFirmware/Configurations/tree/import-2.0.x/config/examples/Creality/Ender-3/FYSETC%20Cheetah)/[cheetah v1.2](https://github.com/MarlinFirmware/Configurations/tree/import-2.0.x/config/examples/Creality/Ender-3/FYSETC%20Cheetah%201.2) or gitee [cheetah v1.1](https://gitee.com/fysetc/Configurations/tree/import-2.0.x/config/examples/Creality/Ender-3/FYSETC%20Cheetah)/[cheetah v1.2](https://gitee.com/fysetc/Configurations/tree/import-2.0.x/config/examples/Creality/Ender-3/FYSETC%20Cheetah%201.2).
+##### Change configuration
+
+You need to modify your `configuration.h` and `configuration_adv.h` according to your machine. Then you can compile the firmware.
 
 #### 5.1.3 Compile the firmware
 
 Open Vscode and open platformio main page and click the "Open Project" button , and direct to the folder where you put your firmware.
 
-![1561099422559](images/AIO_f1.png)
+![1561099422559](images/f1.png)
 
 If everything goes fine , at the bottom you can see several buttons
 
-![1561099546202](images/AIO_f2.png)
+![1561099546202](images/f2.png)
 
-Just click check mark to compile.
+Just click check mark to compile. 
 
-Note: If you generate the hex file fail you may need to open vscode using Administrator Account .
+#### 5.1.4 Upload the firmware
 
-### 5.2 Klipper
+Follow the instruction [here](#jump0).
 
-#### 5.2.1 Requirement
+### <span id="jump52">5.2 Klipper</span>
 
-Our Cheetah board have CH341 chip, so you may need to install its driver. There are a lot of CH341 driver if you search on the internet, links below may help.
+Till now(2021/11/30), Klipper don't have boot offset setting for STM32F401 chip, so we use `no Bootloader` option first. (If you want still want to use Cheetah bootloader, you can change the code following the PR [here](https://github.com/Klipper3d/klipper/pull/5155), then use `32KiB bootloader` option).
 
-[Ch34x](https://github.com/gorgiaxx/CH34x-Driver-Linux)
+![](images/menuconfig.png)
 
-#### 5.2.2 Compile firmware
+````
+make clean
+make
+````
 
-![image-20210707105817241](images/klipper_menuconfig.png)
+Then follow the Firmware Upload section instruction below to upload the firmware.
 
-If you want to use sdcard bootloader, you can follow the instructions [github](https://github.com/FYSETC/FYSETC-Cheetah/tree/master/bootloader) or [gitee](https://gitee.com/fysetc/FYSETC-Cheetah/tree/master/bootloader).
+I made the PR for Klipper of `Cheetah v2.0` config, you can check it [here](https://github.com/Klipper3d/klipper/pull/4934).
 
-After you upload the firmware, please power down Cheetah first, then power on again.  And use the following octoprint parameter.
+### 5.3  <span id="jump0">Firmware Upload</span>
 
-![image-20210707110514671](images/octoprint_serial.png)
+We provide several ways to upload the firmware.
 
-### 5.3 Upload the firmware
+#### 5.3.1 <span id="jump1">Upload the firmware(SDCARD)</span>
 
-We provide several ways to upload the firmware .
+*If you use Klipper firmware with `No bootloader` option, you can't use this method. This method only works with bootloader.* 
 
-#### Method 1:  Upload the firmware with sdcard
+Uploading firmware using SD card is our default way to update the firmware as `Cheetah v2.0` already has the `bootloader` on it when it leave the factory. But if you once upload the firmware to `Cheetah v2.0` flash address `0x08000000`, then the bootloader in `Cheetah v2.0` will be gone, then you need to upload the bootloader to `Cheetah v2.0` yourself, please follow the README in bootloader folder ([github](https://github.com/FYSETC/FYSETC-Cheetah-v2/tree/main/bootloader) or [gitee](https://gitee.com/fysetc-mirrors/FYSETC-Cheetah-v2/tree/main/bootloader)) to upload the bootloader.
 
-You need to upload `bootloader` first, please follow the `README` in `bootloader` folder in this repository. Well, link is [github](https://github.com/FYSETC/FYSETC-Cheetah/tree/master/bootloader) or [gitee](https://gitee.com/fysetc/FYSETC-Cheetah/tree/master/bootloader).
+##### How to upload firmware with bootloader
 
-#### Method 2: Upload the firmware(windows,linux,Mac) - for Marlin
+Copy your compiled firmware file ```firmware.bin```(If you use klipper firmware, you need to rename `klipper.bin` to `firmware.bin`) file to the SD card , and insert it to the SD card slot which is at the right side of the board, and then power up the board. You may need to wait for about 30s to finish uploading. When finished firmware name will change to `old.bin`. 
 
-This method only works for Marlin. You can just click the upload button in platformio to upload the firmware.
+#### 5.3.2 <span id="jump4">Upload the firmware(dfu-util)</span>
 
-![1561099546202](images/AIO_f2_1.png)
+This method works in linux, that means should work in raspberry pi.
 
-#### Method 3: Upload the firmware(windows)
+1. Enter DFU mode first
 
-This method only works in windows system. 
+   - First power off the board
+   - Place jumper on BT0 and 3.3V pin![image-20211130182000593](images/boot_jumper.png) 
+   - Connect USB cable to the board and your computer 
+   - Power up the board with 24v 
 
-After compiling , you should see the firmware file `firmware.hex` in the folder `FIRMWARE_LOCATE\Marlin\Marlin\.pio\build\STM32F103RC_fysetc\`
+2. Make sure dfu-util is installed, shoot `dfu-util --version` command to check.
 
-You can follow the following steps to upload the bootloader.
+   Sample output:
 
-- Download the flash software in our [github](https://github.com/FYSETC/STM32Flasher) or [gitee](https://gitee.com/fysetc/STM32Flasher).
+   ```
+   dfu-util 0.9
+   
+   Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+   Copyright 2010-2016 Tormod Volden and Stefan Schmidt
+   This program is Free Software and has ABSOLUTELY NO WARRANTY
+   Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+   ```
 
-- Power the board with power supply and connect the board to your PC with USB cable
+   If not , you should install it first, use the package manager of your distribution to get the latest version, like
 
-- Double the click "FlyMcu.exe" software
+   ```
+   sudo apt-get install dfu-util
+   ```
 
-![image-20210706170320150](images/Flymcu.png)
+3. Then use the command below to upload the firmware. You should replace `firmware.bin` below with your built firmware bin file location like `out/klipper.bin`. Change flash address `0x08008000` to bootloader you choosed. (If you use Marlin firmware, you need to set it to `0x08008000`. If you use klipper firmware and you choose boot address `32kiB bootloader` (decribe  [here](#jump52)) when compiling klipper then set it `0x08008000`, if `no Bootloader` , set it `0x08000000`.)
 
-- Select `Reset@DTR low(<-3v),ISP @RTS High`
+   ```
+   dfu-util -R -a 0 -s 0x08008000:leave -D firmware.bin
+   ```
+   
+5. Remove boot jumper and power-off then power on the board. 
 
-- Click "Port" to select the port of your USB 
+#### 5.3.3 <span id="jump">Upload the firmware(WINDOWS DFU)</span>
 
-- Select `Bootloader-STM32F103.hex` in the `Code File For Online ISP:` edit box. There is bootloader file named `Bootloader-STM32F103.hex` beside this `README` file. 
+The other way to upload the firmware is using DFU.
 
-- At last, click  `Start ISP(p)` button to upload the firmware.
+##### Step 1. Download stm32cubeprogrammer 
 
-#### Method 4: Upload the firmware(Klipper)
+You can download it from ST website.
 
-This method is only for Klipper firmware. According to the method from Klipper config file for Cheetah [here](https://github.com/KevinOConnor/klipper/blob/master/config/generic-fysetc-cheetah-v1.1.cfg) and [here](https://github.com/KevinOConnor/klipper/blob/master/config/generic-fysetc-cheetah-v1.2.cfg). You can run the command
+https://www.st.com/zh/development-tools/stm32cubeprog.html
 
-```
-stm32flash -w out/klipper.bin -v -i rts,-dtr,dtr /dev/ttyUSB0
-```
+Open the STM32CubeProgrammer software.
 
-#### Method 5: Upload the firmware(linux)
+![1574332767079](images/cx.png)
 
-This method only works in Linux system.
+##### Step 2. Enter DFU mode
 
-- ##### Load usb driver
+1. First power off the board
+2. Place jumper on BT0 and 3.3V pin![image-20211130182000593](images/boot_jumper.png) 
+4. Connect USB cable to the board and your computer 
+5. Power up the board with 24v 
 
+Now the board is in DFU mode. 
 
-Delete the old version driver /lib/modules/$(uname -r)/kernel/drivers/usb/serial/ch341.ko
+***REMEMBER to remove the jumper if you finish uploading firmware or it will enter DFU mode again.***
 
-```
-rm /lib/modules/$(uname -r)/kernel/drivers/usb/serial/ch341.ko
-```
+##### Step 3. Upload the firmware
 
-Download the CH34x driver(linux version) from our [github](https://github.com/FYSETC/CH340-Driver) or [gitee](https://gitee.com/fysetc/CH340-Driver).
+Now you can connect and flash the Cheetah board with stm32cubeprogrammer with the following operation.
 
-Follow the `readme.txt` to make and load the driver.
+![1574386395071](images/c2.png)
 
-If you want the driver load automatically every time your PC power up. You can copy the ch34x.ko file to 
+Do as the red number shows in the screen shot.
 
-directory /lib/modules/$(uname -r)/kernel/drivers/usb/serial/ , and do
+1. Click the button to find the DFU port.
+2. Connect the DFU 
+3. Choose the "firmware.bin" file.
+4. If your firmware is `.hex` file, skip this step. Fill in the 'Start address' with (If you use Marlin, set it `0x08008000`. If you use Klipper firmware and you choose boot address `32kiB bootloader` (decribe [here](#jump52)) when compiling klipper then set it `0x08008000`, if `no Bootloader` , set it `0x08000000`.)
+5. Start Programming
+5. Remove boot jumper and power-off then power on the board. 
 
-```
-depmod 
-```
+#### 5.3.4 Upload firmware(platformio)
 
-- ##### Install stm32flash tool
+If you compile Marlin yourself with platformio,you can follow the instructions below to upload the firmware.
 
+##### Step 1. Enter DFU mode first
 
-First get the code
+- First power off the board
+- Place jumper on BT0 and 3.3V pin![image-20211130182000593](images/boot_jumper.png) 
+- Connect USB cable to the board and your computer 
+- Power up the board with 24v 
 
-```
-git clone https://git.code.sf.net/p/stm32flash/code stm32flash-code
-```
+##### Step 2. Click the upload button to upload firmware
 
-Then follow the INSTALL file to install the software
+![](images\platformio_upload.png)
 
-- ##### Upload the firmware
+## 6. FAQ
 
 
-Connect the motherboard with USB cable and your PC. And do
+To be done...
 
-```
-dmesg
-```
-
-And you will get message like 
-
-![1562654867797](images/AIO_f4.png)
-
-the ttyUSB0 is the port to communicate with the motherboard.
-
-And then go the `firmware.hex` file location directory and do the follow command to upload the firmware
-
-```
- stm32flash -w firmware.hex -v -i rts,-dtr /dev/ttyUSB0
-```
-
-## 6. Version
-----------------
-V1.1：
-
-1. Initial version
-
-V1.2a：
-
-1. Change 2209 to 2208 and support 2208 UART mode
-2. Add a controlled fan for hotend
-3. And a 24 to 12V/2A Circuit for fans and mosfets
-4. Add mosfet driver chip
-5. Remove the RGB circuit and I2C pins
-6. Change the 4P pin header（1.1 is USB pinout） to UART1
-7. Fixed USB voltage reflow to PSU issue
-
-V1.2b：
-
-1. Fix some silks mark
-2. Update MOSFET drive circuit
-
-## 7. FAQ：
-
---------------------
-
-### 1. Why use USB-TO-UART chip for USB？
-
-We just want to give you a convenient way to update the firmware without having to think about which bootloader to use and how to jumper BOOT0&BOOT1.
-Also, if your board is already installed in the machine, the jumper setting is more inconvenient for you.
-So, by adding a chip that can solve the problem, why not do it?
-
-### 2. Why does the USB power flow back to the PSU?
-
-At the time of design, we thought that plugging in the USB is just to update the firmware, and at other times you will use the SD card for printing. Even if you use USB printing, it should be a short-time debugging.
-Even, we found that most of the 2560 boards did the same, and nothing went wrong. This should be a way of testing over time.
-Until TH3D promotes this problem in the whole world, I think this will cause confusion for many people, so I will solve this problem whether or not it will cause problems, and it was already solved on the 1.2a version.
-
-### 3. The direction of the encoder is wrong？
-
-First of all, this is not a hardware problem, we can adjust it through software, and it is very easy.
-Secondly, there is no fixed standard in this direction, and different people may not like the same.
-Finally, we have changed to the most favorite way, if you want to reverse, you can also set the firmware yourself.
-***Note: In fact, our price is only the price of a hardware platform, we have never calculated the value of software, we think that as one of the contributors and users of marlin, we should follow the spirit of open source, make more people easier Get the convenience of open source. Instead of selling it with open source resources.***
-
-### 4. The screen displays garbled characters？
-
-First of all, we should know that low-voltage signals are easily interfered, so we should try to avoid the screen line and the high-voltage and high-current lines being too close.
-In addition, our people usually have static electricity on their hands, and directly touch some electronic components, which may also affect normal signal transmission.
-So if it is just an accidental phenomenon and it will disappear after re-power, then don't worry.
-If it has been there, please contact us and we will deal with it according to the specific situation!
-
-### 5. Y-motor got very hot
-
-Actually there is an inappropriate firmware configuration.
-You need to change
-
-```
- #define CHOPPER_TIMING CHOPPER_DEFAULT_12V
-```
-
-to 
-
-```
- #define CHOPPER_TIMING CHOPPER_DEFAULT_24V
-```
-### 6. Can't save config to eeprom
-This is a firmware issue that has been fixed so far, you can fix it by upgrading the firmware.
-For new firmware,the default config is not for cheetah board anymore as we have other boards to release and the need to build the firmware, you need to change default_envs to fysetc_STM32F1 in platformio.ini file and replace the configuration.h and configuration_adv.h file with FYSETC example config. 
-
-
-
-**We will continue to update, please look forward to it!***
-
-## 8. Tech Support
-
----
+## 7. Tech Support
 Please submit any technical issue into our [forum](http://forum.fysetc.com/) 
