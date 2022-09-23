@@ -131,7 +131,7 @@ nav:
     - FYSETC Cheetah v2: Cheetah_Board_V20.md
     - FYSETC E4: E4.md
     - FYSETC SPIDER : Spider.md
-
+    - FYSETC SPIDER KING : FYSETC-SPIDER-KING.md
 
 - LCDs and Displays:
     - LCDs and Displays Introduction: LCDs and Displays.md
@@ -160,7 +160,8 @@ nav:
     - ST820 V1.0: ST820_V1.0.md
     - LV8729 V1.0: LV8729_V1.0.md
     - HV5160: HV5160.md
-        
+    - QHV5160: QHV5160.md
+
 - Modules:
     - PT100_Stick Introduction: PT100_STICK.md
     
@@ -185,6 +186,7 @@ nav:
     - Original Prusa MMU2S clone: Original-Prusa-MMU2S-clone.md
     - Prusa mk3s bear upgrade kit: PRUSA-MK3S-Bear-Upgrade-kit.md
     - Prusa-mk3s-clone: Prusa-mk3s-clone.md
+    - Annex-Engineering Sherpa extruder: Sherpa-extruder.md
  
 - Sensors:
     - Sensors Introduction: Sensors.md
