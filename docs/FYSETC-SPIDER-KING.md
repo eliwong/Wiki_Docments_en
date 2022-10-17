@@ -435,3 +435,7 @@ If you compile Marlin yourself with platformio,you can follow the instructions b
   ***REMEMBER to remove BT0 jumper if you finish uploading firmware or it will enter DFU mode again.***
 
 ##### Step 2. Click the upload button to upload firmware
+
+## 5. STLs
+
+We have upload some STLs for some 3D printers, like Voron: [holder](https://github.com/FYSETC/FYSETC-SPIDER-KING/tree/main/STLs).
