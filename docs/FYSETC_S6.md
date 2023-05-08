@@ -188,9 +188,27 @@ The UART socket next to the limit switch can be used to connect serial devices s
 
 ![](images/RGB_FAN.png)
 
-## 4. Firmware
+#### 3.3.5 4028/4056/4 Pin (PWM+Taco) Fan
 
----
+1. Isolate the 4 wires by their functions, you should have following wires, +12v, Gnd, PWM, Tacho
+   Consult your fan’s datasheet for this purpose. Generally, it is the blue wire in the case of Delta Fans and it is brown wire in case of Sanyo Fans
+2. Connect the +12v and GND wires to the 12v Ports on fysetc s6. 
+   Please note that the s6 v2 can not deliver a current greater than 2A from 12v ports.
+3. Connect the PWM wire to Pin PA0 (please confirm pin name by looking at the back of your board, we are using the Signal pin of XMax Endstop)
+4. Connect the taco wire to the Signal Pin of YMAX Endstop (PA1)
+5. Configure Klipper by modifying your printer.cfg as following
+
+###### Klipper configuration
+
+```
+[fan]
+pin: !PA0
+cycle_time: 0.00004 # or 0.01
+tachometer_pin: PA1
+tachometer_poll_interval: 0.0005 # will support up to a 30.000 RPM fan with 2 pulses per rotation.
+```
+
+## 4. Firmware
 
 ### 4.1 Marlin
 

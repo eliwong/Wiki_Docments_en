@@ -165,6 +165,12 @@ V2.3
 
 ![](images/spider2.3_rpi.png)
 
+##### CAN BUS
+
+If you want to enable Spider CANBUS network in Klipper, please check 4.2.1 chapter `Communication interface` section.
+
+![](images/CANBUS.jpg)
+
 ### 3.5 Pin Out
 
 #### 3.5.1 Spider v1.x
@@ -457,6 +463,12 @@ serial: /dev/ttyAMA0
 ```
 
 Besides this make option, you still need to follow the instructions that `Connect RPI uart.md` file says, you can find the file [github](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/firmware/Klipper/Connect%20RPI%20uart.md) or [gitee](https://gitee.com/fysetc/FYSETC-SPIDER/blob/main/firmware/Klipper/Connect%20RPI%20uart.md).
+
+### 3. CAN bus (on PD0/PD1)
+
+![](images/ci3.png)
+
+You need to follow Klipper CANBUS instruction here [CANBUS - Klipper documentation](https://www.klipper3d.org/CANBUS.html#finding-the-canbus_uuid-for-new-micro-controllers) after you compiled and upload the firmware.
 
 #### 4.2.2 Compile firmware
 

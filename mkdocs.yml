@@ -154,6 +154,7 @@ nav:
     - TMC2208: TMC2208.md
     - TMC2208中文版: TMC2208中文版.md
     - Silent2209: Silent2209.md
+    - S2210: S2210.md
     - Silent5160: S5160_V1.2.md
     - Silent5161: S5161_V1.1.md
     - Silent2225: TMC2225.md
@@ -162,9 +163,13 @@ nav:
     - LV8729 V1.0: LV8729_V1.0.md
     - HV5160: HV5160.md
     - QHV5160: QHV5160.md
+    - EXT2160: EXT2160_EN.md
+    - EXT2160中文版: EXT2160_CN.md
 
 - Modules:
     - PT100_Stick Introduction: PT100_STICK.md
+    - SB CAN TH: SB CAN ToolHead.md
+    - SB CAN TH中文版: SB CAN ToolHead中文版.md
     
 - Cables and Wires:
     - Cables and Wires Introduction: Cables and Wires.md

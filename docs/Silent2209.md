@@ -1,9 +1,9 @@
 ## Product Introduction
 ---
 
-![2209v3.0](images/2209v3.0.png)
+![(images/2209v3.0.png)<img src="assets/image-20230508155154792.png" alt="image-20230508155154792" style="zoom:50%;" />
 
-![2209V3.1主图](images/2209V3.1主图.jpg)
+
 
 The TMC2209 is an ultra-silent motor driver IC for two phase stepper motors. TMC2209 pinning is compatible to a number of legacy drivers as well as to the TMC2208. TRINAMICs sophisticated StealthChop2 chopper ensures noiseless operation,maximum efficiency and best motor torque. Its fast current regulation and optional combination with SpreadCycle allow highly dynamic motion while adding. StallGuard for sensorless homing. The integrated power MOSFETs handle motor currents up to 2A RMS with protection and diagnostic features for robust and reliable operation. A simple to use UART interface opens up tuning and control options. Store application tuning to OTP memory.Industries’ most advanced STEP/DIR stepper motor driver family upgrades designs to noiseless and most precise operation for cost-effective and highly competitive solutions.Step/Dir Drivers for Two-Phase Bipolar Stepper Motors up to 2.8A peak –StealthChop™ for Quiet Movement – UART Interface Option –Sensorless Stall Detection StallGuard4. 
 
@@ -50,7 +50,9 @@ dcStep                                    | yes
 ### V3.0
 ![2209引脚图V3.0](images/2209引脚图V3.0.jpg)
 ### V3.1
-![TMC2209_V31_引脚图](images/TMC2209_V31_引脚图.png)
+![TMC2209_V31_引脚图](images/TMC2209_V31_引脚图.png)![image-20230508160723032]
+### V4.0
+![TMC2209_V40_引脚图](assets/image-20230508160723032.png)
 
 Pin|Function
 :---:|---
@@ -72,6 +74,7 @@ MS1| Microstep resolution configuration (internal pull-down resistors)
 MS2| MS1: 00: 1/8, 01: 1/2, 10: 1/4 11: 1/16 For UART based configuration selection of UART Address 0…3 
 SP	|Chopper mode selection: Low/pin open=StealthChop, High=SpreadCycle
 CLK	|CLK input. Tie to GND using short wire for internal clock or supply external clock.
+**TYPE**	|<font color="red"> **The V4.0 version replaces the original CLK pin with a module type identification pin, which is mainly used for spider king.**</font>
 TX	|UART TX,   Connected to the PDN via a 1K resistor on board
 RX	|UART RX,   Directly connected to the PDN
 DIAG	|Diagnostic and StallGuard output. Hi level upon stall detection or driver error. Reset error condition by ENN=high.
@@ -151,9 +154,17 @@ You can use every RS232 serial adapter with 0-5V logic levels (e.g. FTDI-Breakou
 ![2209V3.1原理图](images/2209V3.1原理图.png)
 
 1. add CLK pin ，not connect in default，tie to GND via 0R
+
 2. SPREAD pin is floating. Reserve pull-up and pull-down resistors.
+
 3. Move TX from 3 to 5
+
 4. UART mode is compatible with F6,S6,SKR series and MKS series motherboards.
+
+### V4.0 Hardware Connection
+
+![image-20230508161953018](assets/image-20230508161953018.png)
+
 
 ---
 
